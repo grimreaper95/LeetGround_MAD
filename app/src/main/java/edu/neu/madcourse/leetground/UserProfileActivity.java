@@ -137,4 +137,11 @@ public class UserProfileActivity extends AppCompatActivity {
         Log.d("shashank95", "updating leagueRank Adapter");
         leagueRankAdapter.notifyDataSetChanged();
     }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        startActivity(new Intent(this, LeaguesActivity.class));
+        finish();
+    }
 }

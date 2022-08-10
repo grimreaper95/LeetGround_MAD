@@ -4,6 +4,7 @@
     package="edu.neu.madcourse.leetground">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,33 +17,35 @@
         android:theme="@style/Theme.LeetGround"
         tools:targetApi="31">
         <activity
+            android:name=".LeaguesActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-<!--            <intent-filter android:label="LeetGround">-->
-<!--                <action android:name="android.intent.action.VIEW" />-->
+            <intent-filter android:label="LeetGround">
+                <action android:name="android.intent.action.VIEW" />
 
-<!--                <category android:name="android.intent.category.DEFAULT" />-->
-<!--                <category android:name="android.intent.category.BROWSABLE" />-->
-<!--                &lt;!&ndash; Accepts URIs that begin with "http://www.example.com/gizmos” &ndash;&gt;-->
-<!--                <data-->
-<!--                    android:host="leetground"-->
-<!--                    android:pathPrefix="/league"-->
-<!--                    android:scheme="https" />-->
-<!--                &lt;!&ndash; note that the leading "/" is required for pathPrefix &ndash;&gt;-->
-<!--            </intent-filter>-->
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <data
+                    android:host="leetground"
+                    android:pathPrefix="/league"
+                    android:scheme="https" />
+                <!-- note that the leading "/" is required for pathPrefix -->
+            </intent-filter>
         </activity>
         <activity
             android:name=".UserProfileActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".LeaderBoardActivity"
             android:exported="false" />

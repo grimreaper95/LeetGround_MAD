@@ -50,36 +50,37 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-        etUserName = (EditText) findViewById(R.id.username);
-        etPassword = (EditText) findViewById(R.id.password);
-        tvSignup = (TextView) findViewById(R.id.signup);
-        btnLogin = (Button) findViewById(R.id.login);
+        etUserName = findViewById(R.id.username);
+        etPassword = findViewById(R.id.password);
+        tvSignup = findViewById(R.id.signup);
+        btnLogin = findViewById(R.id.login);
 
         //Creating sharedPreferences file to save user settings across the app
         SharedPreferences sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
-        // Creating an Editor object to edit(write to the file)
+//        if (!sharedPreferences.getBoolean("loggedin", false)) {
+//            startActivity(new Intent(this, LeaguesActivity.class));
+//            finish();
+//        }
+
         SharedPreferences.Editor spEdit = sharedPreferences.edit();
 
-        // Storing the key and its value as the data fetched from edittext
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("https")
+                .authority(SERVER_URL)
+                .appendPath("authenticate");
 
-//        Uri.Builder builder = new Uri.Builder();
-//        builder.scheme("https")
-//                .authority(SERVER_URL)
-//                .appendPath("authenticate");
-        //startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
-        //finish();
-        String url = "https://mad-backend-sprinboot-server.herokuapp.com/authenticate";
+        String url = builder.build().toString();
         Log.d("shashank", url);
+
+
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 JSONObject jsonBody = new JSONObject();
-
-
                 try {
-                    jsonBody.put("username", "Jacob");
-                    jsonBody.put("password", "Jacob");
+                    jsonBody.put("username", etUserName.getText().toString());
+                    jsonBody.put("password", etPassword.getText().toString());
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -115,8 +116,8 @@ public class LoginActivity extends AppCompatActivity {
                                     spEdit.putString("password", password);
                                     spEdit.putBoolean("isReminderOn",
                                             Boolean.parseBoolean(isReminderOn));
-                                    spEdit.putInt("coins",
-                                            Integer.parseInt(coins));
+                                    spEdit.putInt("coins", Integer.parseInt(coins));
+                                    spEdit.putBoolean("loggedIn", true);
                                     spEdit.apply();
                                     startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
                                     finish();
