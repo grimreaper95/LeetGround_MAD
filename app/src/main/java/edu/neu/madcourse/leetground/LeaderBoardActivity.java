@@ -1,0 +1,226 @@
+package edu.neu.madcourse.leetground;
+
+import static edu.neu.madcourse.leetground.Constants.SERVER_URL;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class LeaderBoardActivity extends AppCompatActivity{
+
+    private List<User> userDataList;
+    private RecyclerView linkRecyclerView;
+    private LeaderBoardAdapter leaderBoardAdapter;
+//    private FloatingActionButton floatingActionButton;
+    private String leagueId;
+    private String leagueName = "dummy league 1";
+    private String leagueAccessCode = "MjYtZHVtbXkgbGVhZ3VlIDItMg";
+    private String deepLink = "https://leetground/league";
+    private SwipeRefreshLayout mSwipeRefreshLayout;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_leader_board);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_leaderboard_layout);
+        userDataList = new ArrayList<>();
+        // UPDATE LEAGUE ID RECEIVED FROM PREVIOUS PAGE AS STRING
+        leagueId = "35";
+        if (savedInstanceState != null) {
+            userDataList = new ArrayList<>(savedInstanceState.getParcelableArrayList("link_data_list"));
+        }
+        linkRecyclerView = findViewById(R.id.leaderboard_recycler_view);
+        linkRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        leaderBoardAdapter = new LeaderBoardAdapter(userDataList, this);
+        linkRecyclerView.setAdapter(leaderBoardAdapter);
+        getAllUsers();
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Execute code when refresh layout swiped
+                getAllUsers();
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.leaderboard_menu, menu);
+        return true;
+    }
+
+    private void getAllUsers() {
+        Uri.Builder builder = new Uri.Builder();
+        builder.scheme("https")
+                .authority(SERVER_URL)
+                .appendPath("league")
+                .appendPath(leagueId)
+                .appendPath("users");
+
+        String url = builder.build().toString();
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                url,
+                null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+                        Log.d("shashank", response.toString());
+                        // Process the JSON
+                        try{
+                            userDataList.clear();
+                            // Loop through the array elements
+                            for(int i=0; i < response.length(); i++){
+                                // Get current json object
+                                JSONObject student = response.getJSONObject(i);
+                                Log.d("shashank", student.toString());
+                                // Get the current student (json object) data
+                                String userName = student.getString("userId");
+                                int userScore = Integer.parseInt(student.getString("easySolved"));
+                                userDataList.add(new User(userName, userScore, i + 1));
+                                if (i == response.length() - 1) {
+                                    Log.d("shashank95", userDataList.size() + " size ");
+                                    updateLeaderBoardRows();
+                                }
+
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        } finally {
+                            if (mSwipeRefreshLayout.isRefreshing()) {
+                                mSwipeRefreshLayout.setRefreshing(false);
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        // Do something when error occurred
+                        Log.d("shashank", error.toString());
+                    }
+                }
+        );
+        SingletonVolley.getInstance(this).addToRequestQueue(jsonArrayRequest);
+    }
+
+
+
+//    int cnt = 0;
+
+
+
+//    private void refreshLeaderBoard(List<User> users) {
+//        //RequestQueue requestQueue = Volley.newRequestQueue(this);
+////        Log.d("shashank95", userNames.size() + "");
+//
+//        /*for (User user : users) {
+//            String url = "https://leetcode-stats-api.herokuapp.com/" + user.getUserName();
+//            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+//                    Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+//                @Override
+//                public void onResponse(JSONObject response) {
+//                    //textView.setText("Response: " + response.toString());
+//                    Log.d("shashank95", user.getUserName() + " " + response.toString());
+//                    try {
+//                        user.setUserScore(Integer.parseInt(response.getString("totalSolved")));
+//                    } catch (JSONException exception) {
+//                        Log.d("shashank95", exception.toString());
+//                    }
+//                    cnt++;
+//                    if (cnt == users.size()) {
+//                        Log.d("shashank95", "" + cnt);
+//                        updateLeaderBoardRows();
+//                    }
+//                }
+//            },
+//            new Response.ErrorListener() {
+//                @Override
+//                public void onErrorResponse(VolleyError error) {
+//                    Log.d("shashank95", error.toString());
+//                }
+//            });
+//            SingletonVolley.getInstance(this).addToRequestQueue(jsonObjectRequest);
+//        }*/
+//    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("link_data_list", new ArrayList(userDataList));
+    }
+
+    private void updateLeaderBoardRows() {
+        Log.d("shashank95", "updating adapter");
+        leaderBoardAdapter.notifyDataSetChanged();
+    }
+
+
+    private String getDeepLink() {
+        return deepLink + "/" + leagueAccessCode;
+    }
+
+    private void shareInvite() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra
+                (Intent.EXTRA_TEXT, "Join our league " +
+                        leagueName +
+                        " on LeetGround using the following access code:\n" +
+                        leagueAccessCode + "\n or you can click here: " + getDeepLink() + " if you have " +
+                        "LeetGround installed!");
+        startActivity(shareIntent);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.share_invite:
+                // User chose the "Settings" item, show the app settings UI...
+                shareInvite();
+                return true;
+
+            case R.id.refresh_leaderboard:
+                mSwipeRefreshLayout.setRefreshing(true);
+                getAllUsers();
+                return true;
+            default:
+                // If we got here, the user's action was not recognized.
+                // Invoke the superclass to handle it.
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+}

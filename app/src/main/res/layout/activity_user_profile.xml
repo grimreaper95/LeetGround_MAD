@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/user_profile_image"
+        android:layout_width="122dp"
+        android:layout_height="123dp"
+        android:layout_gravity="start"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/ic_baseline_face_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.119"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/edit_profile_pic"
+        android:layout_width="31dp"
+        android:layout_height="34dp"
+        android:layout_alignEnd="@+id/user_profile_image"
+        android:layout_gravity="end"
+        android:layout_marginTop="128dp"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toTopOf="@+id/user_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.294"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.205" />
+
+    <TextView
+        android:id="@+id/user_profile_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/user_profile_image"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="end"
+        android:layout_marginTop="68dp"
+        android:src="@drawable/ic_baseline_edit_24"
+        android:text="Ankit Mehta"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/user_profile_points_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.296"
+        app:layout_constraintStart_toEndOf="@+id/user_profile_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.606" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.269"
+        app:layout_constraintStart_toEndOf="@+id/user_profile_image"
+        app:layout_constraintTop_toBottomOf="@+id/user_profile_name"
+        app:layout_constraintVertical_bias="0.207">
+
+        <TextView
+            android:id="@+id/user_profile_points_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/user_profile_name"
+            android:layout_alignTop="@+id/user_profile_name"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:text="Points: "
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/leetcode_username_value"
+            app:layout_constraintEnd_toStartOf="@+id/user_profile_points_value"
+            app:layout_constraintHorizontal_bias="0.792"
+            app:layout_constraintStart_toEndOf="@+id/user_profile_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.473" />
+
+        <TextView
+            android:id="@+id/user_profile_points_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/user_profile_name"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/user_profile_points_title"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:text="59"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/leetcode_username_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.676"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_profile_name"
+            app:layout_constraintVertical_bias="0.0" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.145"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_profile_image"
+        app:layout_constraintVertical_bias="0.173">
+
+        <TextView
+            android:id="@+id/leetcode_username_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LeetCode Username:"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/leetcode_username_value"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.122"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edit_profile_pic"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/leetcode_username_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ankit95"
+            android:textColor="#F8A01A"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/league_rank_recycler_view"
+        tools:layout_editor_absoluteX="0dp">
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/league_rank_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+        app:layout_constraintVertical_bias="0.086"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/user_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.457"
+        tools:layout_editor_absoluteX="10dp">
+
+        <TextView
+            android:id="@+id/title_user_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="5dp"
+            android:gravity="center"
+            android:text="LEAGUE NAME"
+            android:textColor="#F8A01A"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/title_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="13dp"
+            android:gravity="center"
+            android:text="RANK"
+            android:textColor="#F8A01A"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
