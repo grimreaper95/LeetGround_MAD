@@ -135,7 +135,7 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
                         Log.e(TAG,"get here already");
                         JSONObject league = response.getJSONObject(i);
                         String league_name = league.getString("leagueId");
-                        leagueItems.add(new LeagueItem(league_name,"2"));
+                        leagueItems.add(new LeagueItem(league_name,userId));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

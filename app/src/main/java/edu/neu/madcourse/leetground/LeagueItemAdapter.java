@@ -55,6 +55,6 @@ public class LeagueItemAdapter extends RecyclerView.Adapter<LeagueItemAdapter.Le
             user_num = itemView.findViewById(R.id.num_user);
         }
     }
-
+    
 
 }

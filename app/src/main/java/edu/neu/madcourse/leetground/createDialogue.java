@@ -61,8 +61,6 @@ public class createDialogue extends AppCompatDialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         String League_name = editLeague_name.getText().toString();
                         PostCreate();
-                        dialogueListener.notify(League_name,"2");
-
                     }
                 });
 
@@ -90,7 +88,7 @@ public class createDialogue extends AppCompatDialogFragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
+                        dialogueListener.notify(editLeague_name.getText().toString(), userId);
                     }
                 }, new Response.ErrorListener() {
             @Override
