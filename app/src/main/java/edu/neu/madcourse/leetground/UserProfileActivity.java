@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -49,6 +50,10 @@ public class UserProfileActivity extends AppCompatActivity {
         leagueRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         leagueRankAdapter = new LeagueRankAdapter(leagueDataList, this);
         leagueRecyclerView.setAdapter(leagueRankAdapter);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
+        userId = sharedPreferences.getString("userId", "");
+
         getAllLeagues();
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +88,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 .appendPath("League");
 
         String url = builder.build().toString();
-
+        Log.d("shashank", url);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 url,
@@ -108,7 +113,7 @@ public class UserProfileActivity extends AppCompatActivity {
                                 leagueDataList.add(new LeagueRank(leagueName, leagueRank));
                                 if (i == response.length() - 1) {
                                     Log.d("shashank95", leagueDataList.size() + " size ");
-                                    // updateLeaderBoardRows();
+                                    updateLeagueRankRows();
                                 }
 
                             }
@@ -128,9 +133,8 @@ public class UserProfileActivity extends AppCompatActivity {
         SingletonVolley.getInstance(this).addToRequestQueue(jsonArrayRequest);
     }
 
-    private void updateLeaderBoardRows() {
+    private void updateLeagueRankRows() {
         Log.d("shashank95", "updating leagueRank Adapter");
         leagueRankAdapter.notifyDataSetChanged();
     }
-
 }

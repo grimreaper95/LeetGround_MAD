@@ -15,15 +15,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = getIntent();
-        if (intent != null) {
-            Uri data = intent.getData();
-            if (data != null) {
-                List<String> pathSegments = data.getPathSegments();
-                Toast.makeText(this,"Access code: " + pathSegments.get(1),
-                        Toast.LENGTH_LONG).show();
-            }
-        }
         startActivity(new Intent(getApplicationContext(), LoginActivity.class));
     }
 }
