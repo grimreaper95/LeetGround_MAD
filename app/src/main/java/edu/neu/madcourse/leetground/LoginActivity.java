@@ -163,4 +163,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void goRegister(View view){
+        if(view.getId() == R.id.signup){
+            Intent i = new Intent(LoginActivity.this,activityRegister.class);
+            startActivity(i);
+        }
+    }
 }
