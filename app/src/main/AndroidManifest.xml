@@ -49,6 +49,7 @@
         <activity
             android:name=".LeaderBoardActivity"
             android:exported="false" />
+        <activity android:name=".activityRegister"/>
     </application>
 
 </manifest>
