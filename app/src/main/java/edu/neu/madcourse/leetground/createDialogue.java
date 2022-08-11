@@ -88,7 +88,7 @@ public class createDialogue extends AppCompatDialogFragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        dialogueListener.notify(editLeague_name.getText().toString(), userId);
+                        dialogueListener.notify(editLeague_name.getText().toString(), 1, userId);
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -102,7 +102,7 @@ public class createDialogue extends AppCompatDialogFragment {
     }
 
     public interface DialogueListener{
-        void notify(String league_name,String user_id);
+        void notify(String leagueName, int leagueId, String userId);
     }
 
     @Override

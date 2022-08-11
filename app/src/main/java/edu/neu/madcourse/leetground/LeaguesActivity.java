@@ -2,6 +2,7 @@ package edu.neu.madcourse.leetground;
 
 import static edu.neu.madcourse.leetground.Constants.SERVER_URL;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -130,12 +131,12 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
             public void onResponse(JSONArray response) {
                 // get json objet to get data
                 //JSONArray jsonArray = response.getJSONArray(0);
-                for(int i = 0; i < response.length();i++){
+                for(int i = 0; i < response.length();i++) {
                     try {
                         Log.e(TAG,"get here already");
                         JSONObject league = response.getJSONObject(i);
                         String league_name = league.getString("leagueId");
-                        leagueItems.add(new LeagueItem(league_name,userId));
+                        leagueItems.add(new LeagueItem(league_name, Integer.parseInt(league_name), userId));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -166,11 +167,15 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
     }
 
     @Override
-    public void notify(String name,String userid) {
-
-        leagueItems.add(new LeagueItem(name,userid));
+    public void notify(String leagueName, int leagueId, String usersInLeague) {
+        leagueItems.add(new LeagueItem(leagueName, leagueId, usersInLeague));
         leagueItemAdapter.notifyDataSetChanged();
-
     }
 
+    public void onClickCalled(String leagueName, String leagueId) {
+        // Call another acitivty here and pass some arguments to it.
+        startActivity(new Intent(this, LeaderBoardActivity.class)
+                .putExtra("league_name", leagueName)
+                .putExtra("league_id", "1"));
+    }
 }

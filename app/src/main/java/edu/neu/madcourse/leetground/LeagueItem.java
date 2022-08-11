@@ -1,19 +1,25 @@
 package edu.neu.madcourse.leetground;
 
 public class LeagueItem  {
-    private String leaguename;
-    private String user_number;
+    private String leagueName;
+    private int leagueId;
+    private String userNumber;
 
-    public LeagueItem(String mleaguename,String muser_number){
-        leaguename = mleaguename;
-        user_number = muser_number;
+    public LeagueItem(String leagueName, int leagueId, String userNumber){
+        this.leagueName = leagueName;
+        this.leagueId = leagueId;
+        this.userNumber = userNumber;
     }
 
     public String getLeaguename(){
-        return leaguename;
+        return leagueName;
+    }
+
+    public int getLeagueId(){
+        return leagueId;
     }
 
     public String getUser_number(){
-        return user_number;
+        return userNumber;
     }
 }

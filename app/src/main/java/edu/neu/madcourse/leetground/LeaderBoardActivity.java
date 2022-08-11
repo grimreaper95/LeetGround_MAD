@@ -3,11 +3,13 @@ package edu.neu.madcourse.leetground;
 import static edu.neu.madcourse.leetground.Constants.SERVER_URL;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,29 +34,57 @@ public class LeaderBoardActivity extends AppCompatActivity{
     private List<User> userDataList;
     private RecyclerView linkRecyclerView;
     private LeaderBoardAdapter leaderBoardAdapter;
-//    private FloatingActionButton floatingActionButton;
     private String leagueId;
     private String leagueName = "dummy league 1";
     private String leagueAccessCode = "MjYtZHVtbXkgbGVhZ3VlIDItMg";
     private String deepLink = "https://leetground/league";
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
+    private TextView tvLeagueName;
+    private TextView tvUserRank;
+    private TextView tvUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leader_board);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.refresh_leaderboard_layout);
+
+        leagueName = getIntent().getStringExtra("league_name");
+        leagueId = getIntent().getStringExtra("league_id");
+
+        mSwipeRefreshLayout = findViewById(R.id.refresh_leaderboard_layout);
         userDataList = new ArrayList<>();
         // UPDATE LEAGUE ID RECEIVED FROM PREVIOUS PAGE AS STRING
-        leagueId = "35";
+
         if (savedInstanceState != null) {
             userDataList = new ArrayList<>(savedInstanceState.getParcelableArrayList("link_data_list"));
         }
+
         linkRecyclerView = findViewById(R.id.leaderboard_recycler_view);
         linkRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         leaderBoardAdapter = new LeaderBoardAdapter(userDataList, this);
         linkRecyclerView.setAdapter(leaderBoardAdapter);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
+
+        String leagueName = sharedPreferences.getString("leagueName", "");
+        //sharedPreferences.getString(, "");
+        String userName = sharedPreferences.getString("userName", "");
+        String userScore = sharedPreferences.getString("userScore", "");
+
+
+
+        tvLeagueName = findViewById(R.id.league_name);
+        tvLeagueName.setText(leagueName);
+        tvUserRank = findViewById(R.id.current_user_rank);
+        tvUserRank.setText("#3");
+
+        tvUserName = findViewById(R.id.current_user_name);
+        tvUserRank.setText(userName);
+
+        tvUserName = findViewById(R.id.current_user_score);
+        tvUserRank.setText(userScore);
+
+
         getAllUsers();
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

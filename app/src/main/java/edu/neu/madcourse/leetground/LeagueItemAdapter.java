@@ -37,6 +37,14 @@ public class LeagueItemAdapter extends RecyclerView.Adapter<LeagueItemAdapter.Le
 
         holder.league_name.setText(league_name);
         holder.user_num.setText(user_number);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((LeaguesActivity) v.getContext()).onClickCalled(holder.league_name.getText().toString()
+                , String.valueOf(mleagueItems.get(position).getLeagueId()));
+            }
+        });
     }
 
     @Override
@@ -55,6 +63,6 @@ public class LeagueItemAdapter extends RecyclerView.Adapter<LeagueItemAdapter.Le
             user_num = itemView.findViewById(R.id.num_user);
         }
     }
-    
+
 
 }

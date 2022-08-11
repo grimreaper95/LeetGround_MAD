@@ -31,14 +31,22 @@ import java.util.List;
 public class UserProfileActivity extends AppCompatActivity {
 
     private ImageView profileImage;
-    private TextView leetcodeUsername;
-    private TextView name;
+
+    private TextView tvUserName;
+    private TextView tvUserPoints;
+    private TextView tvUserCoins;
+    private TextView tvProfileName;
 
     private List<LeagueRank> leagueDataList;
     private RecyclerView leagueRecyclerView;
     private LeagueRankAdapter leagueRankAdapter;
 
-    private String userId = "1";
+    private String userId;
+    private String userName;
+    private String profileName;
+    private int userPoints;
+    private int userCoins;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,20 @@ public class UserProfileActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", "");
+        userName = sharedPreferences.getString("userName", "");
+        userPoints = sharedPreferences.getInt("coins", 0);
+        profileName = sharedPreferences.getString("name", "");
+
+
+        tvUserName = findViewById(R.id.profile_username_value);
+        tvUserName.setText(userName);
+
+        tvUserPoints = findViewById(R.id.user_profile_points_value);
+        tvUserPoints.setText(String.valueOf(userPoints));
+
+        tvProfileName = findViewById(R.id.user_profile_name);
+        tvProfileName.setText(profileName);
+
 
         getAllLeagues();
         profileImage.setOnClickListener(new View.OnClickListener() {
