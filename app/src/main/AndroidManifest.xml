@@ -50,6 +50,10 @@
             android:name=".LeaderBoardActivity"
             android:exported="false" />
         <activity android:name=".activityRegister"/>
+
+        <activity
+            android:name=".Store"
+            android:exported="false" />
     </application>
 
 </manifest>

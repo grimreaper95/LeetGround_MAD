@@ -66,10 +66,10 @@ public class UserProfileActivity extends AppCompatActivity {
         profileName = sharedPreferences.getString("name", "");
 
 
-        tvUserName = findViewById(R.id.profile_username_value);
+        tvUserName = findViewById(R.id.leetcode_username_value);
         tvUserName.setText(userName);
 
-        tvUserPoints = findViewById(R.id.user_profile_points_value);
+        tvUserPoints = findViewById(R.id.user_points_value);
         tvUserPoints.setText(String.valueOf(userPoints));
 
         tvProfileName = findViewById(R.id.user_profile_name);
@@ -158,6 +158,10 @@ public class UserProfileActivity extends AppCompatActivity {
     private void updateLeagueRankRows() {
         Log.d("shashank95", "updating leagueRank Adapter");
         leagueRankAdapter.notifyDataSetChanged();
+    }
+
+    public void goShopping(View view) {
+        startActivity(new Intent(this, Store.class));
     }
 
     @Override
