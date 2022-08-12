@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -112,6 +114,13 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.leagues_menu, menu);
+        return true;
+    }
+
     public void parseJSON(){
 
 //        String url = "https://mad-backend-sprinboot-server.herokuapp.com/user/2/League";
@@ -177,5 +186,20 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
         startActivity(new Intent(this, LeaderBoardActivity.class)
                 .putExtra("league_name", leagueName)
                 .putExtra("league_id", "1"));
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.user_profile:
+                // User chose the "Settings" item, show the app settings UI...
+                startActivity(new Intent(this, UserProfileActivity.class));
+                finish();
+                return true;
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            default:
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

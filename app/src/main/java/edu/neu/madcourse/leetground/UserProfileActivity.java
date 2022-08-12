@@ -64,12 +64,15 @@ public class UserProfileActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", "");
         userName = sharedPreferences.getString("userName", "");
-        userPoints = sharedPreferences.getInt("coins", 0);
+        userCoins = sharedPreferences.getInt("coins", 0);
+        userPoints = sharedPreferences.getInt("points", 0);
         profileName = sharedPreferences.getString("name", "");
 
         logoutButton = findViewById(R.id.log_out);
         tvUserName = findViewById(R.id.leetcode_username_value);
         tvUserName.setText(userName);
+        tvUserCoins = findViewById(R.id.user_coins_value);
+        tvUserCoins.setText(String.valueOf(userCoins));
 
         tvUserPoints = findViewById(R.id.user_points_value);
         tvUserPoints.setText(String.valueOf(userPoints));
@@ -83,6 +86,8 @@ public class UserProfileActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.commit();
+                startActivity(new Intent(getApplication(), LoginActivity.class));
+                finish();
             }
         });
 
