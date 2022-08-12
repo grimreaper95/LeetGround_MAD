@@ -180,6 +180,7 @@
             android:hint="Billing Address">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/billing_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Northeastern University, Boston, MA"/>
@@ -211,54 +212,9 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/user_name"
+    <Button
+        android:id="@+id/log_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.145"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_profile_image"
-        app:layout_constraintVertical_bias="0.173">
-
-        <TextView
-            android:id="@+id/leetcode_username_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="LeetCode Username:"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/leetcode_username_value"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.122"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_profile_pic"
-            app:layout_constraintVertical_bias="1.0" />
-
-
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/league_rank_recycler_view"
-        tools:layout_editor_absoluteX="0dp">
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/league_rank_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_constraintVertical_bias="0.086"
-        tools:layout_editor_absoluteX="0dp" />
-
-
-
+        android:text="Log out"/>
 </LinearLayout>

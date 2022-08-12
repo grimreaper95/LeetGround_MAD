@@ -54,7 +54,7 @@ public class ShopItemAdapter extends RecyclerView.Adapter<ShopItemAdapter.ShopIt
                 FragmentActivity activity = (FragmentActivity)(mContext);
                 FragmentManager fm = activity.getSupportFragmentManager();
                 Shop_Confirm_Dialogue alertDialog = new Shop_Confirm_Dialogue();
-                alertDialog.getPrice(price,mContext);
+                alertDialog.getPrice(price,mContext,title);
                 alertDialog.show(fm, "fragment_alert");
             }
         });
