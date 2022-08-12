@@ -117,7 +117,7 @@ public class Shop_Confirm_Dialogue extends AppCompatDialogFragment {
         Log.d("send shop email start", url);
 
         String subject = "LeetGround Item purchase Confirmation";
-        String body = "Thank you for your purchase. Your order for "+mtitle+"is on its way to the address: "+address.toString();
+        String body = "Thank you for your purchase. Your order for "+mtitle+"is on its way to the address: "+address.getText().toString();
 
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("senderEmail", email);

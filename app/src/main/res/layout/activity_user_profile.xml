@@ -8,7 +8,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="150dp"
         android:padding="20dp"
         android:background="#fece2f"
         android:layout_margin="10dp"
@@ -54,18 +54,6 @@
             android:text="ankit95"
             android:textSize="20sp" />
 
-        <TextView
-            android:id="@+id/user_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/leetcode_username_value"
-            android:layout_marginLeft="40dp"
-            android:layout_toRightOf="@id/user_profile_image"
-            android:includeFontPadding="false"
-            android:text="ankit95@gmail.com"
-            android:textSize="20sp" />
-
-
     </RelativeLayout>
 
     <LinearLayout
@@ -75,7 +63,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
-            android:layout_height="125dp"
+            android:layout_height="100dp"
             android:layout_weight="1"
             app:cardBackgroundColor="#fece2f"
             app:cardElevation="10dp"
@@ -112,10 +100,6 @@
                     android:layout_centerHorizontal="true"/>
 
 
-
-
-
-
             </RelativeLayout>
 
 
@@ -125,7 +109,7 @@
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
-            android:layout_height="125dp"
+            android:layout_height="100dp"
             android:layout_weight="1"
             app:cardBackgroundColor="#fece2f"
             app:cardElevation="10dp"
@@ -174,6 +158,44 @@
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            app:cardCornerRadius="20dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_add_24"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email: "
+                    android:textSize="15dp"
+                    android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/user_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:text="ankit95@gmail.com"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+
+
+
+
+
+        </androidx.cardview.widget.CardView>
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -185,36 +207,58 @@
                 android:layout_height="wrap_content"
                 android:text="Northeastern University, Boston, MA"/>
 
-
-
         </com.google.android.material.textfield.TextInputLayout>
 
-        <RelativeLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_margin="10dp"
+            >
 
             <ImageView
+                android:id="@+id/shopping_icon"
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:src="@drawable/ic_baseline_add_24" />
-            <TextView
+
+            <Button
                 android:id="@+id/shop_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Redeem Coins"
+                android:layout_toRightOf="@+id/shopping_icon"
+                android:gravity="center"
                 android:onClick="goShopping"
-                android:gravity="center"/>
+                android:text="Redeem Coins"
+                android:textColor="@color/purple_200" />
 
 
-        </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Reminder:         "
+                android:layout_marginLeft="80dp"/>
 
+            <Switch
+                android:id="@+id/reminder_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="save changes"/>
+
+        <Button
+            android:id="@+id/log_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log out"/>
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/log_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Log out"/>
+
 </LinearLayout>
