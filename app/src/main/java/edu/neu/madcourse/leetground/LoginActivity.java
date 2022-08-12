@@ -55,12 +55,12 @@ public class LoginActivity extends AppCompatActivity {
         tvSignup = findViewById(R.id.signup);
         btnLogin = findViewById(R.id.login);
 
-        //Creating sharedPreferences file to save user settings across the app
         SharedPreferences sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
-//        if (!sharedPreferences.getBoolean("loggedin", false)) {
-//            startActivity(new Intent(this, LeaguesActivity.class));
-//            finish();
-//        }
+
+        if (sharedPreferences.getBoolean("loggedin", false)) {
+            startActivity(new Intent(this, LeaguesActivity.class));
+            finish();
+        }
 
         SharedPreferences.Editor spEdit = sharedPreferences.edit();
 
