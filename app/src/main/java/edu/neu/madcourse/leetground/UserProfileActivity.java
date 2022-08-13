@@ -1,12 +1,8 @@
 package edu.neu.madcourse.leetground;
 
-import static edu.neu.madcourse.leetground.Constants.SERVER_URL;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -15,21 +11,9 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserProfileActivity extends AppCompatActivity {
 
@@ -39,6 +23,8 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView tvUserPoints;
     private TextView tvUserCoins;
     private TextView tvProfileName;
+    private EditText etUserAddress;
+
 
 //    private List<LeagueRank> leagueDataList;
     private RecyclerView leagueRecyclerView;
@@ -47,12 +33,12 @@ public class UserProfileActivity extends AppCompatActivity {
     private String userId;
     private String userName;
     private String profileName;
+    private String userAddress;
+
     private int userPoints;
     private int userCoins;
-    private SharedPreferences sharedPreferences;
+
     private Button logoutButton;
-    private Switch reminder;
-    private Button save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,16 +50,18 @@ public class UserProfileActivity extends AppCompatActivity {
 //        leagueRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        leagueRankAdapter = new LeagueRankAdapter(leagueDataList, this);
 //        leagueRecyclerView.setAdapter(leagueRankAdapter);
-        sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", "");
         userName = sharedPreferences.getString("userName", "");
         userCoins = sharedPreferences.getInt("coins", 0);
         userPoints = sharedPreferences.getInt("points", 0);
         profileName = sharedPreferences.getString("name", "");
+        userAddress = sharedPreferences.getString("address", "143 Park Drive");
 
         logoutButton = findViewById(R.id.log_out);
         tvUserName = findViewById(R.id.leetcode_username_value);
         tvUserName.setText(userName);
+
         tvUserCoins = findViewById(R.id.user_coins_value);
         tvUserCoins.setText(String.valueOf(userCoins));
 
@@ -83,11 +71,11 @@ public class UserProfileActivity extends AppCompatActivity {
         tvProfileName = findViewById(R.id.user_profile_name);
         tvProfileName.setText(profileName);
 
-        // initiate a Switch
-        reminder = findViewById(R.id.reminder_switch);
-        Boolean switchState = reminder.isChecked();
+        etUserAddress = findViewById(R.id.user_address);
+        etUserAddress.setText(userAddress);
 
-        save = findViewById(R.id.save_changes);
+        etUserAddress.clearFocus();
+
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,12 +87,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 //        getAllLeagues();
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -198,12 +181,5 @@ public class UserProfileActivity extends AppCompatActivity {
         //super.onBackPressed();
         startActivity(new Intent(this, LeaguesActivity.class));
         finish();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        userCoins = sharedPreferences.getInt("coins", 0);
-        tvUserCoins.setText(String.valueOf(userCoins));
     }
 }

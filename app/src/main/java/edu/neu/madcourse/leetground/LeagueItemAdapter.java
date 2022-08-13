@@ -33,7 +33,7 @@ public class LeagueItemAdapter extends RecyclerView.Adapter<LeagueItemAdapter.Le
     public void onBindViewHolder(@NonNull LeagueItemViewHolder holder, int position) {
         LeagueItem currentItem = mleagueItems.get(position);
         String league_name = currentItem.getLeaguename();
-        String user_number = currentItem.getUser_number();
+        int user_number = currentItem.getUser_number();
 
         holder.league_name.setText(league_name);
         holder.user_num.setText(user_number);
