@@ -51,6 +51,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private TextView tvUserPoints;
     private TextView tvUserCoins;
     private TextView tvProfileName;
+    private TextView tvEmail;
     private static final int pic_id = 123;
 //    private List<LeagueRank> leagueDataList;
     private RecyclerView leagueRecyclerView;
@@ -73,6 +74,7 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         this.requestQueue = Volley.newRequestQueue(this);
+        tvEmail.findViewById(R.id.user_email);
 //        leagueDataList = new ArrayList<>();
         //leagueRecyclerView = findViewById(R.id.league_rank_recycler_view);
         profileImage = findViewById(R.id.user_profile_image);
@@ -87,6 +89,7 @@ public class UserProfileActivity extends AppCompatActivity {
         userCoins = sharedPreferences.getInt("coins", 0);
         userPoints = sharedPreferences.getInt("points", 0);
         profileName = sharedPreferences.getString("name", "");
+        tvEmail.setText(sharedPreferences.getString("email", ""));
         String encodedProfilePicImgStr= sharedPreferences.getString("profilePicImgByteArrStr", "");
         if(encodedProfilePicImgStr!=null) {
             byte[] profilePicImgByteArr = Base64.decode(encodedProfilePicImgStr, Base64.DEFAULT);
