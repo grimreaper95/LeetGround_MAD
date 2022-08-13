@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -48,8 +49,10 @@ public class UserProfileActivity extends AppCompatActivity {
     private String profileName;
     private int userPoints;
     private int userCoins;
-
+    private SharedPreferences sharedPreferences;
     private Button logoutButton;
+    private Switch reminder;
+    private Button save;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,7 @@ public class UserProfileActivity extends AppCompatActivity {
 //        leagueRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        leagueRankAdapter = new LeagueRankAdapter(leagueDataList, this);
 //        leagueRecyclerView.setAdapter(leagueRankAdapter);
-        SharedPreferences sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", "");
         userName = sharedPreferences.getString("userName", "");
         userCoins = sharedPreferences.getInt("coins", 0);
@@ -80,6 +83,12 @@ public class UserProfileActivity extends AppCompatActivity {
         tvProfileName = findViewById(R.id.user_profile_name);
         tvProfileName.setText(profileName);
 
+        // initiate a Switch
+        reminder = findViewById(R.id.reminder_switch);
+        Boolean switchState = reminder.isChecked();
+
+        save = findViewById(R.id.save_changes);
+
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,7 +99,12 @@ public class UserProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
 //        getAllLeagues();
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -184,5 +198,12 @@ public class UserProfileActivity extends AppCompatActivity {
         //super.onBackPressed();
         startActivity(new Intent(this, LeaguesActivity.class));
         finish();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userCoins = sharedPreferences.getInt("coins", 0);
+        tvUserCoins.setText(String.valueOf(userCoins));
     }
 }

@@ -44,11 +44,12 @@ public class Shop_Confirm_Dialogue extends AppCompatDialogFragment {
     private String mtitle;
     private TextInputEditText address;
     private static final String TAG = "Shop_Confirm_Dialogue";
+    private SharedPreferences sharedPreferences;
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
 
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MadSharedPref", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences("MadSharedPref", Context.MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", "");
         coins = sharedPreferences.getInt("coins",0);
         email = sharedPreferences.getString("email","");
@@ -95,6 +96,10 @@ public class Shop_Confirm_Dialogue extends AppCompatDialogFragment {
         StringRequest stringRequest = new StringRequest(Request.Method.PUT,url,response -> {
             Toast.makeText(context, "Successfully purchased. It's on its way to you!", Toast.LENGTH_LONG).show();
             sendshopEmail();
+            SharedPreferences.Editor spEdit = sharedPreferences.edit();
+            Integer res = coins-Integer.valueOf(mprice);
+            spEdit.putInt("coins", res);
+            spEdit.commit();
         },error -> {
             Log.e(TAG,"onFailure"+error.toString());
         });

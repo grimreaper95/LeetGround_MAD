@@ -69,7 +69,7 @@ public class activityRegister extends AppCompatActivity {
         params.put("email",email.getText().toString());
         params.put("password",password.getText().toString());
         params.put("isReminderOn","1");
-        params.put("coins","0");
+        params.put("coins","100");
 
         JsonObjectRequest request_json = new JsonObjectRequest(url, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
