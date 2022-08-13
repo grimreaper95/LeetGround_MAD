@@ -204,8 +204,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/billing_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Northeastern University, Boston, MA"/>
+                android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

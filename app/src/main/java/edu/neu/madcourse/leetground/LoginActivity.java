@@ -100,22 +100,23 @@ public class LoginActivity extends AppCompatActivity {
 
                                 try{
                                      String jwtToken = response.getString("jwt");
-                                     String userName = response.getJSONObject("maduser").getString("name");
+                                     String name = response.getJSONObject("maduser").getString("name");
                                      String userId = response.getJSONObject("maduser").getString("id");
-                                     String name = response.getJSONObject("maduser").getString("username");
+                                     String userName = response.getJSONObject("maduser").getString("username");
                                      String email = response.getJSONObject("maduser").getString("email");
                                      String password = response.getJSONObject("maduser").getString("password");
                                      String isReminderOn = response.getJSONObject("maduser").getString("isReminderOn");
                                      String coins = response.getJSONObject("maduser").getString("coins");
+                                     String billingAddress=response.getJSONObject("maduser").getString("billingAddress");
 
                                     spEdit.putString("jwtToken", jwtToken);
                                     spEdit.putString("userId", userId);
                                     spEdit.putString("userName", userName);
                                     spEdit.putString("name", name);
+                                    spEdit.putString("billingAddress",billingAddress);
                                     spEdit.putString("email", email);
                                     spEdit.putString("password", password);
-                                    spEdit.putBoolean("isReminderOn",
-                                            Boolean.parseBoolean(isReminderOn));
+                                    spEdit.putBoolean("isReminderOn","1".equals(isReminderOn)?true:false);
                                     spEdit.putInt("coins", Integer.parseInt(coins));
                                     spEdit.putBoolean("loggedIn", true);
                                     spEdit.apply();

@@ -18,17 +18,24 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class UserProfileActivity extends AppCompatActivity {
@@ -53,14 +60,18 @@ public class UserProfileActivity extends AppCompatActivity {
     private Button logoutButton;
     private Switch reminder;
     private Button save;
-
+    private TextInputEditText billingInputEditText;
+    private RequestQueue requestQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+        this.requestQueue = Volley.newRequestQueue(this);
 //        leagueDataList = new ArrayList<>();
         //leagueRecyclerView = findViewById(R.id.league_rank_recycler_view);
         profileImage = findViewById(R.id.user_profile_image);
+        billingInputEditText= findViewById(R.id.billing_address);
+
 //        leagueRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        leagueRankAdapter = new LeagueRankAdapter(leagueDataList, this);
 //        leagueRecyclerView.setAdapter(leagueRankAdapter);
@@ -71,6 +82,7 @@ public class UserProfileActivity extends AppCompatActivity {
         userPoints = sharedPreferences.getInt("points", 0);
         profileName = sharedPreferences.getString("name", "");
 
+        billingInputEditText.setText(sharedPreferences.getString("billingAddress", ""));
         logoutButton = findViewById(R.id.log_out);
         tvUserName = findViewById(R.id.leetcode_username_value);
         tvUserName.setText(userName);
@@ -85,7 +97,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
         // initiate a Switch
         reminder = findViewById(R.id.reminder_switch);
-        Boolean switchState = reminder.isChecked();
+        reminder.setChecked(sharedPreferences.getBoolean("isReminderOn",true));
 
         save = findViewById(R.id.save_changes);
 
@@ -102,6 +114,40 @@ public class UserProfileActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                sharedPreferences.getBoolean("isReminderOn",reminder.isChecked());
+                sharedPreferences.getString("billingAddress",billingInputEditText.getText().toString());
+
+                Uri.Builder builder = new Uri.Builder();
+                builder.scheme("https")
+                        .authority(SERVER_URL)
+                        .appendPath("user");
+
+                String url = builder.build().toString();
+
+                HashMap<String, String> params = new HashMap<String, String>();
+                params.put("id",userId);
+                params.put("username",userName);
+                params.put("email",sharedPreferences.getString("email", ""));
+                params.put("password",sharedPreferences.getString("password", ""));
+                params.put("isReminderOn",(reminder.isChecked()==true?"1":"0"));
+                params.put("coins",""+userCoins);
+                params.put("billingAddress",billingInputEditText.getText().toString());
+System.out.println("params: "+params);
+                JsonObjectRequest request_json = new JsonObjectRequest(Request.Method.PUT,url, new JSONObject(params),
+                        new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+                requestQueue.add(request_json);
+
 
             }
         });
