@@ -95,6 +95,7 @@ public class UserProfileActivity extends AppCompatActivity {
             byte[] profilePicImgByteArr = Base64.decode(encodedProfilePicImgStr, Base64.DEFAULT);
             Bitmap profilePicBitmap = BitmapFactory.decodeByteArray(profilePicImgByteArr, 0, profilePicImgByteArr.length);
             profileImage.setImageBitmap(profilePicBitmap);
+            profileImgBitMap=profilePicBitmap;
         }
         billingInputEditText.setText(sharedPreferences.getString("billingAddress", ""));
         logoutButton = findViewById(R.id.log_out);
@@ -156,9 +157,11 @@ public class UserProfileActivity extends AppCompatActivity {
                 params.put("isReminderOn",(reminder.isChecked()==true?"1":"0"));
                 params.put("coins",""+userCoins);
                 params.put("billingAddress",billingInputEditText.getText().toString());
-                byte[] profilePicImgByteArr=convertBitmapToByteArray(profileImgBitMap);
-                String encodedProfilePicImgStr= Base64.encodeToString(profilePicImgByteArr, Base64.DEFAULT);
-                params.put("profilePic",encodedProfilePicImgStr);
+                if(profileImgBitMap!=null) {
+                    byte[] profilePicImgByteArr = convertBitmapToByteArray(profileImgBitMap);
+                    String encodedProfilePicImgStr = Base64.encodeToString(profilePicImgByteArr, Base64.DEFAULT);
+                    params.put("profilePic", encodedProfilePicImgStr);
+                }
            //     System.out.println("encodedProfilePicImgStr: "+encodedProfilePicImgStr);
            //     System.out.println("params: "+params);
                 JsonObjectRequest request_json = new JsonObjectRequest(Request.Method.PUT,url, new JSONObject(params),
