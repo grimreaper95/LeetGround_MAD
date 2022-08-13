@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +27,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                                      String isReminderOn = response.getJSONObject("maduser").getString("isReminderOn");
                                      String coins = response.getJSONObject("maduser").getString("coins");
                                      String billingAddress=response.getJSONObject("maduser").getString("billingAddress");
+                                     String profilePicImgEncoded=response.getJSONObject("maduser").getString("profilePic");
 
                                     spEdit.putString("jwtToken", jwtToken);
                                     spEdit.putString("userId", userId);
@@ -119,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                                     spEdit.putBoolean("isReminderOn","1".equals(isReminderOn)?true:false);
                                     spEdit.putInt("coins", Integer.parseInt(coins));
                                     spEdit.putBoolean("loggedIn", true);
+                                    spEdit.putString("profilePicImgByteArrStr",profilePicImgEncoded);
                                     spEdit.apply();
                                     startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
                                     finish();

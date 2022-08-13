@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+// to do : store token of each user to send notification
 public class activityRegister extends AppCompatActivity {
 
     private EditText username;
