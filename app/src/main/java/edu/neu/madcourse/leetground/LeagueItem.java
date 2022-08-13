@@ -3,9 +3,10 @@ package edu.neu.madcourse.leetground;
 public class LeagueItem  {
     private String leagueName;
     private int leagueId;
-    private String userNumber;
+    private int userNumber;
+    private int leagueSize;
 
-    public LeagueItem(String leagueName, int leagueId, String userNumber){
+    public LeagueItem(String leagueName, int leagueId, int userNumber){
         this.leagueName = leagueName;
         this.leagueId = leagueId;
         this.userNumber = userNumber;
@@ -19,7 +20,7 @@ public class LeagueItem  {
         return leagueId;
     }
 
-    public String getUser_number(){
+    public int getUser_number(){
         return userNumber;
     }
 }

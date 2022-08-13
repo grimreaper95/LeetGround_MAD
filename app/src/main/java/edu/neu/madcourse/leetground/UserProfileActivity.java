@@ -218,7 +218,6 @@ Toast.makeText(UserProfileActivity.this,"Your changes are saved!", Toast.LENGTH_
                 }
                 break;
         }
-
        */
         // Match the request 'pic id with requestCode
         if (requestCode == pic_id) {
