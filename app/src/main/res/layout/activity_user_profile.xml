@@ -92,10 +92,10 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/user_points"
+                    android:id="@+id/user_leagues"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Points"
+                    android:text="My Leagues"
                     android:textSize="14sp"
                     android:includeFontPadding="false"
                     android:layout_below="@id/user_points_value"
@@ -185,7 +185,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
-                    android:text="ankit95@gmail.com"
                     android:textSize="13dp" />
 
             </LinearLayout>
@@ -206,8 +205,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/user_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Northeastern University, Boston, MA"/>
+                android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

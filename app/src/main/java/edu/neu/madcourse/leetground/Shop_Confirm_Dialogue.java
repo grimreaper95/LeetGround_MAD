@@ -61,7 +61,8 @@ public class Shop_Confirm_Dialogue extends AppCompatDialogFragment {
         cur_price = view.findViewById(R.id.shop_text);
 
         View view2 = inflater.inflate(R.layout.activity_user_profile, null);
-        address = view2.findViewById(R.id.user_address);
+        address = view2.findViewById(R.id.billing_address);
+        address.setText(sharedPreferences.getString("billingAddress","Northeastern University, Boston, MA"));
 
         cur_price.setText("Are you sure to spend " +mprice+" coins buying this item?");
         builder.setView(view)
