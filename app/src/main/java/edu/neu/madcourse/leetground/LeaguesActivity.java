@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -44,6 +45,12 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
     private ArrayList<LeagueItem> leagueItems;
     private RequestQueue requestQueue;
     private String userId;
+    private TextView empty_text;
+    private boolean clicked = false;
+    private Animation rotate_open;
+    private Animation rotate_close;
+    private Animation from_to;
+    private Animation to_from;
 
     //private TextView textView;
     ConstraintLayout constraintLayout;
@@ -54,13 +61,17 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
         fab_main = findViewById(R.id.mainbutton);
         fab_join = findViewById(R.id.join_button);
         fab_create = findViewById(R.id.create_button);
+        rotate_open = AnimationUtils.loadAnimation(LeaguesActivity.this,R.anim.rotate_open_anim);
+        rotate_close = AnimationUtils.loadAnimation(LeaguesActivity.this,R.anim.rotate_close_anim);
+        from_to = AnimationUtils.loadAnimation(LeaguesActivity.this,R.anim.from_bottom_anim);
+        to_from = AnimationUtils.loadAnimation(LeaguesActivity.this,R.anim.to_bottom_anim);
 
 
         recyclerView = findViewById(R.id.League_recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         leagueItems = new ArrayList<>();
-
+        empty_text = findViewById(R.id.empty_leagues);
         requestQueue = Volley.newRequestQueue(this);
         SharedPreferences sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
         userId = sharedPreferences.getString("userId", "");
@@ -69,18 +80,15 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
 
         parseJSON();
 
-        Animation rotate_open = AnimationUtils.loadAnimation(LeaguesActivity.this,R.anim.rotate_open_anim);
-        Animation rotate_close = AnimationUtils.loadAnimation(LeaguesActivity.this,R.anim.rotate_close_anim);
-        Animation from_to = AnimationUtils.loadAnimation(LeaguesActivity.this,R.anim.from_bottom_anim);
-        Animation to_from = AnimationUtils.loadAnimation(LeaguesActivity.this,R.anim.to_bottom_anim);
-
 
 
         // click the main button
         fab_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(fab_create.getVisibility() == View.VISIBLE && fab_join.getVisibility() == View.VISIBLE){
+                 setAnimation();
+                 clicked = !clicked;
+                /*if(fab_create.getVisibility() == View.VISIBLE && fab_join.getVisibility() == View.VISIBLE){
                     fab_create.setVisibility(View.GONE);
                     fab_join.setVisibility(View.GONE);
                     fab_create.startAnimation(from_to);
@@ -92,9 +100,10 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
                     fab_join.startAnimation(to_from);
                     fab_create.startAnimation(to_from);
                     fab_main.startAnimation(rotate_close);
-                }
+                }*/
             }
         });
+
 
         // click create button
         fab_create.setOnClickListener(new View.OnClickListener() {
@@ -111,8 +120,27 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
                 openJoinDialogue();
             }
         });
-
+        if(leagueItems.isEmpty() == false){
+            empty_text.setText("");
+        }
     }
+
+    public void setAnimation(){
+        if(!clicked){
+            fab_create.setVisibility(View.VISIBLE);
+            fab_join.setVisibility(View.VISIBLE);
+            fab_create.startAnimation(from_to);
+            fab_join.startAnimation(from_to);
+            fab_main.startAnimation(rotate_open);
+        }else{
+            fab_create.setVisibility(View.GONE);
+            fab_join.setVisibility(View.GONE);
+            fab_create.startAnimation(to_from);
+            fab_join.startAnimation(to_from);
+            fab_main.startAnimation(rotate_close);
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -179,6 +207,7 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
     public void notify(String leagueName, int leagueId, String usersInLeague) {
         leagueItems.add(new LeagueItem(leagueName, leagueId, usersInLeague));
         leagueItemAdapter.notifyDataSetChanged();
+        empty_text.setText("");
     }
 
     public void onClickCalled(String leagueName, String leagueId) {
