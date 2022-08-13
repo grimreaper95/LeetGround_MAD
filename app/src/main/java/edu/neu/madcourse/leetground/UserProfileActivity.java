@@ -74,7 +74,7 @@ public class UserProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         this.requestQueue = Volley.newRequestQueue(this);
-        tvEmail.findViewById(R.id.user_email);
+        tvEmail= findViewById(R.id.user_email);
 //        leagueDataList = new ArrayList<>();
         //leagueRecyclerView = findViewById(R.id.league_rank_recycler_view);
         profileImage = findViewById(R.id.user_profile_image);
@@ -103,8 +103,16 @@ public class UserProfileActivity extends AppCompatActivity {
         tvUserCoins = findViewById(R.id.user_coins_value);
         tvUserCoins.setText(String.valueOf(userCoins));
 
-        tvUserPoints = findViewById(R.id.user_points_value);
-        tvUserPoints.setText(String.valueOf(userPoints));
+        tvUserPoints = findViewById(R.id.user_leagues);
+
+        tvUserPoints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+       // tvUserPoints.setText(String.valueOf(userPoints));
 
         tvProfileName = findViewById(R.id.user_profile_name);
         tvProfileName.setText(profileName);
@@ -141,6 +149,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
                 HashMap<String, String> params = new HashMap<String, String>();
                 params.put("id",userId);
+                params.put("name",profileName);
                 params.put("username",userName);
                 params.put("email",sharedPreferences.getString("email", ""));
                 params.put("password",sharedPreferences.getString("password", ""));
@@ -166,7 +175,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 });
                 requestQueue.add(request_json);
 
-
+Toast.makeText(UserProfileActivity.this,"Your changes are saved!", Toast.LENGTH_SHORT).show();
             }
         });
 //        getAllLeagues();

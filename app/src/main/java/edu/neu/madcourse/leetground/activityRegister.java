@@ -92,7 +92,7 @@ public class activityRegister extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(activityRegister.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(activityRegister.this, "Invalid user details!!", Toast.LENGTH_LONG).show();
                 VolleyLog.e("Error: ", error.getMessage());
 
             }

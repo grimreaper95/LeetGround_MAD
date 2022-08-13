@@ -90,10 +90,10 @@
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/user_points"
+                    android:id="@+id/user_leagues"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Points"
+                    android:text="My Leagues"
                     android:textSize="14sp"
                     android:includeFontPadding="false"
                     android:layout_below="@id/user_points_value"
