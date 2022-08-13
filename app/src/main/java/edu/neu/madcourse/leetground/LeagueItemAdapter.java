@@ -36,7 +36,7 @@ public class LeagueItemAdapter extends RecyclerView.Adapter<LeagueItemAdapter.Le
         int user_number = currentItem.getUser_number();
 
         holder.league_name.setText(league_name);
-        holder.user_num.setText(user_number);
+        holder.user_num.setText(String.valueOf(user_number));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

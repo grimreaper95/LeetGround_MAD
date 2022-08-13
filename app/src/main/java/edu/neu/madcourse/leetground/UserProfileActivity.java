@@ -78,7 +78,7 @@ public class UserProfileActivity extends AppCompatActivity {
 //        leagueDataList = new ArrayList<>();
         //leagueRecyclerView = findViewById(R.id.league_rank_recycler_view);
         profileImage = findViewById(R.id.user_profile_image);
-        billingInputEditText= findViewById(R.id.billing_address);
+        billingInputEditText= findViewById(R.id.user_address);
 
 //        leagueRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        leagueRankAdapter = new LeagueRankAdapter(leagueDataList, this);

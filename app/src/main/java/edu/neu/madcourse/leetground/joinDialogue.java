@@ -57,6 +57,8 @@ public class joinDialogue extends AppCompatDialogFragment {
     }
 
     public void PostJoin(){
+
+
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("MadSharedPref", Context.MODE_PRIVATE);
         String userId = sharedPreferences.getString("userId", "");
         Uri.Builder builder = new Uri.Builder();

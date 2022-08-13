@@ -85,7 +85,15 @@ public class createDialogue extends AppCompatDialogFragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        dialogueListener.notify(editLeague_name.getText().toString(), , response.length());
+
+                        try {
+                            dialogueListener
+                                    .notify(editLeague_name.getText().toString(),
+                                            response.getInt("id")
+                                ,1);
+                        }catch (Exception e){
+
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
