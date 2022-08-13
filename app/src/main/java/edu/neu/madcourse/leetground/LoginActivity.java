@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -21,11 +22,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +39,8 @@ public class LoginActivity extends AppCompatActivity {
     private TextView tvSignup;
     private EditText etUserName, etPassword;
     private Button btnLogin;
+    private  SharedPreferences sharedPreferences;
+    private  SharedPreferences.Editor spEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +61,16 @@ public class LoginActivity extends AppCompatActivity {
         tvSignup = findViewById(R.id.signup);
         btnLogin = findViewById(R.id.login);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
 
-        if (sharedPreferences.getBoolean("loggedin", false)) {
+        sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
+
+        if (sharedPreferences.getBoolean("loggedIn", false)) {
+            incrementCoins();
             startActivity(new Intent(this, LeaguesActivity.class));
             finish();
         }
 
-        SharedPreferences.Editor spEdit = sharedPreferences.edit();
+        spEdit = sharedPreferences.edit();
 
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("https")
@@ -100,27 +108,30 @@ public class LoginActivity extends AppCompatActivity {
 
                                 try{
                                      String jwtToken = response.getString("jwt");
-                                     String userName = response.getJSONObject("maduser").getString("name");
+                                     String name = response.getJSONObject("maduser").getString("name");
                                      String userId = response.getJSONObject("maduser").getString("id");
-                                     String name = response.getJSONObject("maduser").getString("username");
+                                     String userName = response.getJSONObject("maduser").getString("username");
                                      String email = response.getJSONObject("maduser").getString("email");
                                      String password = response.getJSONObject("maduser").getString("password");
                                      String isReminderOn = response.getJSONObject("maduser").getString("isReminderOn");
                                      String coins = response.getJSONObject("maduser").getString("coins");
+                                     String billingAddress=response.getJSONObject("maduser").getString("billingAddress");
+                                     String profilePicImgEncoded=response.getJSONObject("maduser").getString("profilePic");
 
                                     spEdit.putString("jwtToken", jwtToken);
                                     spEdit.putString("userId", userId);
                                     spEdit.putString("userName", userName);
                                     spEdit.putString("name", name);
+                                    spEdit.putString("billingAddress",billingAddress);
                                     spEdit.putString("email", email);
                                     spEdit.putString("password", password);
-                                    spEdit.putBoolean("isReminderOn",
-                                            Boolean.parseBoolean(isReminderOn));
+                                    spEdit.putBoolean("isReminderOn","1".equals(isReminderOn)?true:false);
                                     spEdit.putInt("coins", Integer.parseInt(coins));
                                     spEdit.putBoolean("loggedIn", true);
+                                    spEdit.putString("profilePicImgByteArrStr",profilePicImgEncoded);
                                     spEdit.apply();
-                                    startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
-                                    finish();
+                                    incrementCoins();
+
 //                                     new UserProfile(jwtToken, name, userName, password,
 //                                             email, Boolean.parseBoolean(isReminderOn),
 //                                             Integer.parseInt(coins));
@@ -162,6 +173,28 @@ public class LoginActivity extends AppCompatActivity {
                 SingletonVolley.getInstance(getApplicationContext()).addToRequestQueue(jsonObjectRequest);
             }
         });
+    }
+
+    private void incrementCoins() {
+            String userId = sharedPreferences.getString("userId", "");
+            String url = "https://mad-backend-sprinboot-server.herokuapp.com/user/" + userId + "/increment/1";
+            StringRequest stringRequest = new StringRequest(Request.Method.PUT,url,
+                    response -> {
+                Toast.makeText(this, "Congratulations, you earned 1 coin for daily sign in bonus!", Toast.LENGTH_LONG).show();
+                spEdit.putInt("coins", sharedPreferences.getInt("coins", 0) + 1);
+                spEdit.commit();
+                        startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
+                        finish();
+            },error -> {
+                Log.e("shashank","onFailure"+error.toString());
+            });
+
+                /*response -> ,
+                        //Toast.makeText(,"Success",Toast.LENGTH_SHORT).show(),
+                error -> );
+
+                 */
+            SingletonVolley.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
     public void goRegister(View view){

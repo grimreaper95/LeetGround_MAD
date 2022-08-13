@@ -48,8 +48,9 @@ public class LeaderBoardActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leader_board);
 
-        leagueName = getIntent().getStringExtra("league_name");
+//        leagueName = getIntent().getStringExtra("league_name");
         leagueId = getIntent().getStringExtra("league_id");
+//        leagueAccessCode = getIntent().getStringExtra("league_access_code");
 
         mSwipeRefreshLayout = findViewById(R.id.refresh_leaderboard_layout);
         userDataList = new ArrayList<>();
@@ -74,7 +75,7 @@ public class LeaderBoardActivity extends AppCompatActivity{
 
 
         tvLeagueName = findViewById(R.id.league_name);
-        tvLeagueName.setText(leagueName);
+
         tvUserRank = findViewById(R.id.current_user_rank);
         tvUserRank.setText("#3");
 
@@ -129,13 +130,25 @@ public class LeaderBoardActivity extends AppCompatActivity{
                             // Loop through the array elements
                             for(int i=0; i < response.length(); i++){
                                 // Get current json object
-                                JSONObject student = response.getJSONObject(i);
-                                Log.d("shashank", student.toString());
-                                // Get the current student (json object) data
-                                String userName = student.getString("userId");
-                                int userScore = Integer.parseInt(student.getString("easySolved"));
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                Log.d("shashank", jsonObject.toString());
+
+                                String userName = jsonObject.getJSONObject("maduser").getString("username");
+                                int userScore = Integer.parseInt(jsonObject.getString("totalSolved"));
+
                                 userDataList.add(new User(userName, userScore, i + 1));
+
                                 if (i == response.length() - 1) {
+                                    JSONObject leagueObject = jsonObject.getJSONObject("leagueDetails");
+                                    leagueId = leagueObject.getString("id");
+
+                                    leagueName = leagueObject.getString("leagueName");
+                                    tvLeagueName.setText(leagueName);
+
+                                    leagueAccessCode = leagueObject.getString("accessCode");
+
+
+
                                     Log.d("shashank95", userDataList.size() + " size ");
                                     updateLeaderBoardRows();
                                 }

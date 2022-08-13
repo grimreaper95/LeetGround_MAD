@@ -24,6 +24,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+// to do : store token of each user to send notification
 public class activityRegister extends AppCompatActivity {
 
     private EditText username;
@@ -38,6 +39,7 @@ public class activityRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        this.requestQueue = Volley.newRequestQueue(this);
         username = findViewById(R.id.registration_name);
         leetcodename = findViewById(R.id.registration_leetcodename);
         email = findViewById(R.id.registration_email);
@@ -81,7 +83,6 @@ public class activityRegister extends AppCompatActivity {
                             if(id.equals("-1")){
                                 Toast.makeText(activityRegister.this, "Your Leetcode username doesn't exist.", Toast.LENGTH_LONG).show();
                             }else{
-                                Toast.makeText(activityRegister.this, "Welcome to LeetGround!", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         } catch (JSONException e) {
@@ -91,11 +92,11 @@ public class activityRegister extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                Toast.makeText(activityRegister.this, "Invalid user details!!", Toast.LENGTH_LONG).show();
                 VolleyLog.e("Error: ", error.getMessage());
 
             }
         });
-        requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(request_json);
     }
 }

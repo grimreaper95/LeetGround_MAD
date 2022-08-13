@@ -172,8 +172,9 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
                     try {
                         Log.e(TAG,"get here already");
                         JSONObject league = response.getJSONObject(i);
-                        String league_name = league.getString("leagueId");
-                        leagueItems.add(new LeagueItem(league_name, Integer.parseInt(league_name), userId));
+                        String leagueName = league.getJSONObject("leagueDetails").getString("leagueName");
+                        String leagueId = league.getJSONObject("leagueDetails").getString("id");
+                        leagueItems.add(new LeagueItem(leagueName, Integer.parseInt(leagueId), response.length()));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -204,7 +205,7 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
     }
 
     @Override
-    public void notify(String leagueName, int leagueId, String usersInLeague) {
+    public void notify(String leagueName, int leagueId, int usersInLeague) {
         leagueItems.add(new LeagueItem(leagueName, leagueId, usersInLeague));
         leagueItemAdapter.notifyDataSetChanged();
         empty_text.setText("");
@@ -214,7 +215,7 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
         // Call another acitivty here and pass some arguments to it.
         startActivity(new Intent(this, LeaderBoardActivity.class)
                 .putExtra("league_name", leagueName)
-                .putExtra("league_id", "1"));
+                .putExtra("league_id", leagueId));
     }
 
     @Override

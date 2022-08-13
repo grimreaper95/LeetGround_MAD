@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -86,14 +88,13 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:includeFontPadding="false"
-                    android:text="123"
                     android:textSize="20sp" />
 
                 <TextView
-                    android:id="@+id/user_points"
+                    android:id="@+id/user_leagues"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Points"
+                    android:text="My Leagues"
                     android:textSize="14sp"
                     android:includeFontPadding="false"
                     android:layout_below="@id/user_points_value"
@@ -132,7 +133,6 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:includeFontPadding="false"
-                    android:text="123"
                     android:textSize="20sp" />
 
                 <TextView
@@ -183,7 +183,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:includeFontPadding="false"
-                    android:text="ankit95@gmail.com"
                     android:textSize="13dp" />
 
             </LinearLayout>
@@ -202,10 +201,9 @@
             android:hint="Billing Address">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/billing_address"
+                android:id="@+id/user_address"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Northeastern University, Boston, MA"/>
+                android:layout_height="wrap_content"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
