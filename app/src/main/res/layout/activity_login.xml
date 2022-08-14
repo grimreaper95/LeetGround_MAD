@@ -33,7 +33,7 @@
         android:text="Login"
         android:layout_margin="20dp"
         android:background="#008000"
-        android:textColor="#FFFFFF"
+        android:textColor="#F8A01A"
         android:textStyle="bold"
         android:id="@+id/login"
         android:elevation="10dp"/>
@@ -47,17 +47,18 @@
             android:layout_height="wrap_content"
             android:text="Don't have an account?"
             android:id="@+id/signup_note"
-            android:layout_margin="10dp"
+
             android:textSize="20dp"/>
 
         <TextView
             android:id="@+id/signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="5dp"
             android:onClick="goRegister"
             android:text="SignUp"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:textColor="#F8A01A"/>
 
     </LinearLayout>
 
