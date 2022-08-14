@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "128273075274",
+    "firebase_url": "https://finalproject-7a8ea-default-rtdb.firebaseio.com",
+    "project_id": "finalproject-7a8ea",
+    "storage_bucket": "finalproject-7a8ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128273075274:android:c5152c4fc7fd76261e2ab3",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.leetground"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128273075274-3av2eimucn6j3s02bde8qe9nhv7l8l9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvAA9fuQyGiGWIqbSNmsY_N73scKzLU7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128273075274-3av2eimucn6j3s02bde8qe9nhv7l8l9c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

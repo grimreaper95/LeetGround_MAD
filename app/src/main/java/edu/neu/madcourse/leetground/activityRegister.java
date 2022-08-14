@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
@@ -19,6 +20,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +39,6 @@ public class activityRegister extends AppCompatActivity {
     private EditText confirmpassword;
     private AppCompatButton signupbutton;
     private RequestQueue requestQueue;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +59,12 @@ public class activityRegister extends AppCompatActivity {
                 }else if(!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
                     Toast.makeText(activityRegister.this, "Input email address is not valid!", Toast.LENGTH_LONG).show();
                 }else{
-                    postUser();
+                    findInstanceToken();
                 }
             }
         });
     }
-    public void postUser(){
+    public void postUser(String token){
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("https")
                 .authority(SERVER_URL)
@@ -74,6 +77,7 @@ public class activityRegister extends AppCompatActivity {
         params.put("username",leetcodename.getText().toString());
         params.put("email",email.getText().toString());
         params.put("password",password.getText().toString());
+        params.put("token", token);
         params.put("isReminderOn","1");
         params.put("coins","100");
 
@@ -104,6 +108,19 @@ public class activityRegister extends AppCompatActivity {
         });
         requestQueue.add(request_json);
     }
+
+    public void findInstanceToken(){
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(activityRegister.this, "Could not generate system token!", Toast.LENGTH_SHORT).show();
+                        }else {
+                            String token = task.getResult();
+                            postUser(token);
+                        }
+                    }
+                });
+    }
 }
-
-
