@@ -86,6 +86,7 @@ public class Shop_Confirm_Dialogue extends AppCompatDialogFragment {
 
         return builder.create();
     }
+
     public void getPrice(String price,Context mcontext,String title){
         mprice = price;
         context = mcontext;

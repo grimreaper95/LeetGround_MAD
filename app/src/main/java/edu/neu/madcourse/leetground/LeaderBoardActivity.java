@@ -38,10 +38,16 @@ public class LeaderBoardActivity extends AppCompatActivity{
     private String leagueName = "dummy league 1";
     private String leagueAccessCode = "MjYtZHVtbXkgbGVhZ3VlIDItMg";
     private String deepLink = "https://leetground/league";
+
+    private String userId;
+    private String userName;
+    private String userScore;
+
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private TextView tvLeagueName;
     private TextView tvUserRank;
     private TextView tvUserName;
+    private TextView tvUserScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,21 +75,21 @@ public class LeaderBoardActivity extends AppCompatActivity{
 
         String leagueName = sharedPreferences.getString("leagueName", "");
         //sharedPreferences.getString(, "");
-        String userName = sharedPreferences.getString("userName", "");
-        String userScore = sharedPreferences.getString("userScore", "");
+        userId = sharedPreferences.getString("userId", "");
+        userName = sharedPreferences.getString("userName", "");
+//        userScore = sharedPreferences.getString("userScore", "");
 
 
 
         tvLeagueName = findViewById(R.id.league_name);
-
         tvUserRank = findViewById(R.id.current_user_rank);
-        tvUserRank.setText("#3");
+//        tvUserRank.setText("#3");
 
         tvUserName = findViewById(R.id.current_user_name);
-        tvUserRank.setText(userName);
+        tvUserName.setText(userName);
 
-        tvUserName = findViewById(R.id.current_user_score);
-        tvUserRank.setText(userScore);
+        tvUserScore = findViewById(R.id.current_user_score);
+//        tvUserScore.setText(userScore);
 
 
         getAllUsers();
@@ -110,7 +116,8 @@ public class LeaderBoardActivity extends AppCompatActivity{
                 .authority(SERVER_URL)
                 .appendPath("league")
                 .appendPath(leagueId)
-                .appendPath("users");
+                .appendPath("rank")
+                .appendPath("memebers");
 
         String url = builder.build().toString();
 
@@ -130,13 +137,23 @@ public class LeaderBoardActivity extends AppCompatActivity{
                             // Loop through the array elements
                             for(int i=0; i < response.length(); i++){
                                 // Get current json object
-                                JSONObject jsonObject = response.getJSONObject(i);
+                                JSONObject jsonObject = response.getJSONObject(i).getJSONObject("leagueMemberDTO");
                                 Log.d("shashank", jsonObject.toString());
 
                                 String userName = jsonObject.getJSONObject("maduser").getString("username");
-                                int userScore = Integer.parseInt(jsonObject.getString("totalSolved"));
+                                String currentUserId = jsonObject.getJSONObject("maduser").getString("id");
 
-                                userDataList.add(new User(userName, userScore, i + 1));
+                                String userScore = response.getJSONObject(i).getString("points");
+                                String userRank = response.getJSONObject(i).getString("rank");
+
+
+                                userDataList.add(new User(userName, Integer.parseInt(userScore), i + 1));
+
+
+                                if (currentUserId.equals( userId )) {
+                                    tvUserScore.setText(userScore);
+                                    tvUserRank.setText("#" + userRank);
+                                }
 
                                 if (i == response.length() - 1) {
                                     JSONObject leagueObject = jsonObject.getJSONObject("leagueDetails");
@@ -146,8 +163,6 @@ public class LeaderBoardActivity extends AppCompatActivity{
                                     tvLeagueName.setText(leagueName);
 
                                     leagueAccessCode = leagueObject.getString("accessCode");
-
-
 
                                     Log.d("shashank95", userDataList.size() + " size ");
                                     updateLeaderBoardRows();

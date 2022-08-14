@@ -36,7 +36,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class LeaguesActivity extends AppCompatActivity implements createDialogue.DialogueListener{
+public class LeaguesActivity extends AppCompatActivity implements createDialogue.DialogueListener,
+        joinDialogue.DialogueListener{
     private FloatingActionButton fab_main;
     private FloatingActionButton fab_join;
     private FloatingActionButton fab_create;
@@ -196,7 +197,8 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
 
 
     public void openJoinDialogue(){
-        DialogFragment join_dialogue = new joinDialogue();
+        joinDialogue join_dialogue = new joinDialogue();
+        join_dialogue.setContext(getApplicationContext());
         join_dialogue.show(getSupportFragmentManager(),"join a league");
     }
 

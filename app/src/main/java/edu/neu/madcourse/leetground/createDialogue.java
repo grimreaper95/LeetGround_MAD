@@ -87,10 +87,8 @@ public class createDialogue extends AppCompatDialogFragment {
                     public void onResponse(JSONObject response) {
 
                         try {
-                            dialogueListener
-                                    .notify(editLeague_name.getText().toString(),
-                                            response.getInt("id")
-                                ,1);
+                            dialogueListener.notify(editLeague_name.getText().toString(),
+                                            response.getInt("id"),1);
                         }catch (Exception e){
 
                         }
