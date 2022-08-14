@@ -42,7 +42,6 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<UserViewHolder> {
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         holder.bindThisData(user.get(position));
 //        String userName = user.get(position).getUserName();
-
     }
 
     @Override

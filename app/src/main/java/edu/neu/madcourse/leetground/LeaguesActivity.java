@@ -140,9 +140,6 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
     }
 
     public void parseJSON(){
-
-//        String url = "https://mad-backend-sprinboot-server.herokuapp.com/user/2/League";
-
         Uri.Builder builder = new Uri.Builder();
         builder.scheme("https")
                 .authority(SERVER_URL)

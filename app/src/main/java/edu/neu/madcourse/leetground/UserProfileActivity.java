@@ -66,6 +66,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private int userPoints;
     private int userCoins;
     private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor editor;
     private Button logoutButton;
     private Switch reminder;
     private Button save;
@@ -93,15 +94,19 @@ public class UserProfileActivity extends AppCompatActivity {
         userCoins = sharedPreferences.getInt("coins", 0);
         userPoints = sharedPreferences.getInt("points", 0);
         profileName = sharedPreferences.getString("name", "");
-
         tvEmail.setText(sharedPreferences.getString("email", ""));
+
+        editor = sharedPreferences.edit();
+
         String encodedProfilePicImgStr= sharedPreferences.getString("profilePicImgByteArrStr", "");
-        if(encodedProfilePicImgStr!=null) {
+
+        if(encodedProfilePicImgStr != null) {
             byte[] profilePicImgByteArr = Base64.decode(encodedProfilePicImgStr, Base64.DEFAULT);
             Bitmap profilePicBitmap = BitmapFactory.decodeByteArray(profilePicImgByteArr, 0, profilePicImgByteArr.length);
             profileImage.setImageBitmap(profilePicBitmap);
             profileImgBitMap=profilePicBitmap;
         }
+
         billingInputEditText.setText(sharedPreferences.getString("billingAddress", ""));
         logoutButton = findViewById(R.id.log_out);
         tvUserName = findViewById(R.id.leetcode_username_value);
@@ -132,19 +137,21 @@ public class UserProfileActivity extends AppCompatActivity {
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.clear();
                 editor.commit();
                 startActivity(new Intent(getApplication(), LoginActivity.class));
                 finish();
             }
         });
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked change");
                 sharedPreferences.getBoolean("isReminderOn",reminder.isChecked());
                 sharedPreferences.getString("billingAddress",billingInputEditText.getText().toString());
+
+
 
                 Uri.Builder builder = new Uri.Builder();
                 builder.scheme("https")
@@ -166,14 +173,19 @@ public class UserProfileActivity extends AppCompatActivity {
                     Log.d(TAG, "image is saved ");
                     byte[] profilePicImgByteArr = convertBitmapToByteArray(profileImgBitMap);
                     String encodedProfilePicImgStr = Base64.encodeToString(profilePicImgByteArr, Base64.DEFAULT);
+
+                    editor.putString("profilePicImgByteArrStr", encodedProfilePicImgStr);
+                    editor.commit();
                     params.put("profilePic", encodedProfilePicImgStr);
                 }
-           //     System.out.println("encodedProfilePicImgStr: "+encodedProfilePicImgStr);
-           //     System.out.println("params: "+params);
+
                 JsonObjectRequest request_json = new JsonObjectRequest(Request.Method.PUT,url, new JSONObject(params),
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
+                                editor.putBoolean("isReminderOn", reminder.isChecked());
+                                editor.putString("billingAddress",billingInputEditText.getText().toString());
+                                editor.commit();
                                 Log.d(TAG, "onResponse: request recieved");
                             }
                         }, new Response.ErrorListener() {
@@ -233,6 +245,9 @@ Toast.makeText(UserProfileActivity.this,"Your changes are saved!", Toast.LENGTH_
 
             // BitMap is data structure of image file
             // which store the image in memory
+            if (imageReturnedIntent == null || imageReturnedIntent.getExtras() == null) {
+                return ;
+            }
             Bitmap photo = (Bitmap)imageReturnedIntent.getExtras()
                     .get("data");
 

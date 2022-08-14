@@ -4,11 +4,15 @@ import static edu.neu.madcourse.leetground.Constants.SERVER_URL;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -48,6 +52,7 @@ public class LeaderBoardActivity extends AppCompatActivity{
     private TextView tvUserRank;
     private TextView tvUserName;
     private TextView tvUserScore;
+    private ImageView profileImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +96,15 @@ public class LeaderBoardActivity extends AppCompatActivity{
         tvUserScore = findViewById(R.id.current_user_score);
 //        tvUserScore.setText(userScore);
 
+        profileImage = findViewById(R.id.user_leaderboard_profile_image);
+
+        String encodedProfilePicImgStr= sharedPreferences.getString("profilePicImgByteArrStr", "");
+
+        if(encodedProfilePicImgStr!=null) {
+            byte[] profilePicImgByteArr = Base64.decode(encodedProfilePicImgStr, Base64.DEFAULT);
+            Bitmap profilePicBitmap = BitmapFactory.decodeByteArray(profilePicImgByteArr, 0, profilePicImgByteArr.length);
+            profileImage.setImageBitmap(profilePicBitmap);
+        }
 
         getAllUsers();
 
