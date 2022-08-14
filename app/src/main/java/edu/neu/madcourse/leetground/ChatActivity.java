@@ -1,4 +1,4 @@
-package com.example.demo_chat_app;
+package edu.neu.madcourse.leetground;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -30,7 +32,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -60,17 +61,22 @@ public class ChatActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        this.username="dummy-username";
-        this.leagueId=1;
+        this.userId = Integer.parseInt(intent.getStringExtra("userId"));
+        this.username = intent.getStringExtra("username");
+        this.leagueId = Integer.parseInt(intent.getStringExtra("leagueId"));
+        this.leagueName  = intent.getStringExtra("leagueName");
+
+
         this.button= findViewById(R.id.sendMessage);
+
         adapter = new CustomAdapter(ChatActivity.this, chatMessages);
+
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(ChatActivity.this));
         recyclerView.setAdapter(adapter);
-         this.requestQueue = Volley.newRequestQueue(this);
+        this.requestQueue = Volley.newRequestQueue(this);
+
         getAllChats();
-
-
 
     }
 
@@ -138,12 +144,12 @@ public class ChatActivity extends AppCompatActivity {
         params.put("title","New message!!");
 
         JsonObjectRequest request_json = new JsonObjectRequest( "https://mad-backend-sprinboot-server.herokuapp.com/user/"+userId+"/league/"+leagueId, new JSONObject(params),
-                new Response.Listener<JSONObject>() {
+                new com.android.volley.Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response) {
 
                     }
-                }, new Response.ErrorListener() {
+                }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(ChatActivity.this, "Couldn't notify other league members", Toast.LENGTH_LONG).show();
@@ -151,8 +157,6 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
         requestQueue.add(request_json);
-
-
     }
 
 

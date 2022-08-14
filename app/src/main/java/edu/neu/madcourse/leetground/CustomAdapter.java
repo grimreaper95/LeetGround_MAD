@@ -1,4 +1,4 @@
-package com.example.demo_chat_app;
+package edu.neu.madcourse.leetground;
 
 import android.content.Context;
 import android.view.LayoutInflater;

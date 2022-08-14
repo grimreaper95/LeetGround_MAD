@@ -1,5 +1,5 @@
-<!-- Citation: https://handyopinion.com/recyclerview-with-multiple-view-types-chat-app-example/ -->
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -52,3 +52,5 @@
             android:onClick="sendMessage" />
     </RelativeLayout>
 </RelativeLayout>
+
+    <!-- Citation: https://handyopinion.com/recyclerview-with-multiple-view-types-chat-app-example/ -->

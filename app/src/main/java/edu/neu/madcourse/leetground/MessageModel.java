@@ -1,4 +1,4 @@
-package com.example.demo_chat_app;
+package edu.neu.madcourse.leetground;
 
 import java.text.DateFormat;
 import java.util.Date;

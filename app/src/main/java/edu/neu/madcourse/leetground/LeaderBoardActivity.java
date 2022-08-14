@@ -277,15 +277,19 @@ public class LeaderBoardActivity extends AppCompatActivity{
     }
 
 
-//    private void startLeagueChat() {
-//        startActivity(new Intent(this, ChatActivity.class));
-//    }
+    private void startLeagueChat() {
+        startActivity(new Intent(this, ChatActivity.class)
+                .putExtra("userId", userId)
+                .putExtra("userName", userName)
+                .putExtra("leagueId", leagueId)
+                .putExtra("leagueName", leagueName));
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.league_chat:
-                //startLeagueChat();
+                startLeagueChat();
                 return true;
             case R.id.share_invite:
                 // User chose the "Settings" item, show the app settings UI...

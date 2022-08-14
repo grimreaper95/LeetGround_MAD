@@ -118,6 +118,7 @@ public class activityRegister extends AppCompatActivity {
                             Toast.makeText(activityRegister.this, "Could not generate system token!", Toast.LENGTH_SHORT).show();
                         }else {
                             String token = task.getResult();
+                            Log.d("shashank", token);
                             postUser(token);
                         }
                     }
