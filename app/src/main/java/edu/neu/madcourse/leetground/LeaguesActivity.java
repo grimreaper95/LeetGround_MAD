@@ -171,9 +171,9 @@ public class LeaguesActivity extends AppCompatActivity implements createDialogue
                         e.printStackTrace();
                     }
                 }
-                if(leagueItems.size() > 0){
-                    empty_text.setText("");
-                    sad_face.setVisibility(View.GONE);
+                if(leagueItems.size() == 0){
+                    empty_text.setText("Oops, try to create or join a league!");
+                    sad_face.setVisibility(View.VISIBLE);
                 }
                 recyclerView.setAdapter(leagueItemAdapter);
             }

@@ -76,6 +76,7 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/ic_sad"
+            android:visibility="invisible"
             />
 
         <TextView
@@ -84,7 +85,7 @@
             android:layout_marginEnd="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  Oops, no leagues to show. \nTry to create or join a league!"
+            android:text=""
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

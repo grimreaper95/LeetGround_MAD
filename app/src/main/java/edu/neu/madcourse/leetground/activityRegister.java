@@ -5,6 +5,7 @@ import static edu.neu.madcourse.leetground.Constants.SERVER_URL;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -49,10 +50,12 @@ public class activityRegister extends AppCompatActivity {
         signupbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(password.getText().toString().equals(confirmpassword.getText().toString())){
-                    postUser();
+                if(!password.getText().toString().equals(confirmpassword.getText().toString())){
+                    Toast.makeText(activityRegister.this, "Password not matched", Toast.LENGTH_LONG).show();
+                }else if(!Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()){
+                    Toast.makeText(activityRegister.this, "Input email address is not valid!", Toast.LENGTH_LONG).show();
                 }else{
-                    Toast.makeText(activityRegister.this, "Password not matched", Toast.LENGTH_SHORT).show();
+                    postUser();
                 }
             }
         });

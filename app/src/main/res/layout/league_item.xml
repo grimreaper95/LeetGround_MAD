@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    app:cardCornerRadius="8dp"
+    app:cardCornerRadius="10dp"
     app:cardBackgroundColor="#F8A01A"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
@@ -26,24 +26,26 @@
             android:layout_marginBottom="10dp"
             android:gravity="start"
             android:text="Northeastern coder"
-            android:textColor="#4E4B4B"
+            android:textColor="@color/black"
             android:textSize="25dp" />
 
         <ImageView
+            android:id="@+id/league_people_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="270dp"
             android:src="@drawable/ic_baseline_people_24" />
 
         <TextView
             android:id="@+id/num_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="20dp"
-            android:textSize="15dp" />
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/league_people_icon"
+            android:text="100"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
 
 
     </RelativeLayout>

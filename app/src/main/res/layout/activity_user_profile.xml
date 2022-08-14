@@ -75,7 +75,7 @@
                 android:id="@+id/league_cardview"
                 android:layout_height="80dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="#fece2f"
+                app:cardBackgroundColor="@color/black"
                 app:cardElevation="10dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="15dp">
@@ -104,7 +104,8 @@
                         android:layout_centerHorizontal="true"
                         android:includeFontPadding="false"
                         android:text="My Leagues"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="#F8A01A"/>
 
 
                 </RelativeLayout>
@@ -118,7 +119,7 @@
                 android:layout_width="0dp"
                 android:layout_height="80dp"
                 android:layout_weight="1"
-                app:cardBackgroundColor="#fece2f"
+                app:cardBackgroundColor="@color/black"
                 app:cardElevation="10dp"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="15dp">
@@ -146,6 +147,7 @@
                         android:includeFontPadding="false"
                         android:textSize="20sp"
                         android:layout_marginTop="3dp"
+                        android:textColor="#F8A01A"
                         />
 
                     <TextView
@@ -156,7 +158,8 @@
                         android:layout_centerHorizontal="true"
                         android:includeFontPadding="false"
                         android:text="Coins"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:textColor="#F8A01A"/>
 
                 </RelativeLayout>
 
@@ -203,7 +206,6 @@
                     android:textSize="16dp"
                     android:text="android.dev@northeastern.edu"
                     android:layout_marginLeft="5dp" />
-
 
             </LinearLayout>
             <View
