@@ -32,6 +32,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import org.json.JSONArray;
@@ -47,17 +48,18 @@ import java.util.List;
 public class UserProfileActivity extends AppCompatActivity {
 
     private ImageView profileImage;
-
+    private ImageView edit_profile_pic;
     private TextView tvUserName;
     private TextView tvUserPoints;
     private TextView tvUserCoins;
     private TextView tvProfileName;
     private TextView tvEmail;
+    private MaterialCardView materialCardView;
     private static final int pic_id = 123;
 //    private List<LeagueRank> leagueDataList;
     private RecyclerView leagueRecyclerView;
     private LeagueRankAdapter leagueRankAdapter;
-
+    private static final String TAG = "UserProfileActivity";
     private String userId;
     private String userName;
     private String profileName;
@@ -79,8 +81,9 @@ public class UserProfileActivity extends AppCompatActivity {
 //        leagueDataList = new ArrayList<>();
         //leagueRecyclerView = findViewById(R.id.league_rank_recycler_view);
         profileImage = findViewById(R.id.user_profile_image);
+        edit_profile_pic = findViewById(R.id.edit_profile_pic);
         billingInputEditText= findViewById(R.id.user_address);
-
+        materialCardView =findViewById(R.id.league_cardview);
 //        leagueRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        leagueRankAdapter = new LeagueRankAdapter(leagueDataList, this);
 //        leagueRecyclerView.setAdapter(leagueRankAdapter);
@@ -90,6 +93,7 @@ public class UserProfileActivity extends AppCompatActivity {
         userCoins = sharedPreferences.getInt("coins", 0);
         userPoints = sharedPreferences.getInt("points", 0);
         profileName = sharedPreferences.getString("name", "");
+
         tvEmail.setText(sharedPreferences.getString("email", ""));
         String encodedProfilePicImgStr= sharedPreferences.getString("profilePicImgByteArrStr", "");
         if(encodedProfilePicImgStr!=null) {
@@ -105,9 +109,9 @@ public class UserProfileActivity extends AppCompatActivity {
         tvUserCoins = findViewById(R.id.user_coins_value);
         tvUserCoins.setText(String.valueOf(userCoins));
 
-        tvUserPoints = findViewById(R.id.user_leagues);
+        //tvUserPoints = findViewById(R.id.user_leagues);
 
-        tvUserPoints.setOnClickListener(new View.OnClickListener() {
+        materialCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
@@ -138,7 +142,7 @@ public class UserProfileActivity extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Log.d(TAG, "onClick: clicked change");
                 sharedPreferences.getBoolean("isReminderOn",reminder.isChecked());
                 sharedPreferences.getString("billingAddress",billingInputEditText.getText().toString());
 
@@ -159,6 +163,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 params.put("coins",""+userCoins);
                 params.put("billingAddress",billingInputEditText.getText().toString());
                 if(profileImgBitMap!=null) {
+                    Log.d(TAG, "image is saved ");
                     byte[] profilePicImgByteArr = convertBitmapToByteArray(profileImgBitMap);
                     String encodedProfilePicImgStr = Base64.encodeToString(profilePicImgByteArr, Base64.DEFAULT);
                     params.put("profilePic", encodedProfilePicImgStr);
@@ -169,7 +174,7 @@ public class UserProfileActivity extends AppCompatActivity {
                         new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-
+                                Log.d(TAG, "onResponse: request recieved");
                             }
                         }, new Response.ErrorListener() {
                     @Override
@@ -183,7 +188,7 @@ Toast.makeText(UserProfileActivity.this,"Your changes are saved!", Toast.LENGTH_
             }
         });
 //        getAllLeagues();
-        profileImage.setOnClickListener(new View.OnClickListener() {
+        edit_profile_pic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

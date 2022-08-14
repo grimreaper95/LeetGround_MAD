@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="#F8A01A"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
 
@@ -14,14 +15,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp">
+
         <TextView
             android:id="@+id/item_name"
-            android:gravity="start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
-            android:layout_margin="10dp"
-            />
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="start"
+            android:text="Northeastern coder"
+            android:textColor="#4E4B4B"
+            android:textSize="25dp" />
 
         <ImageView
             android:layout_width="50dp"
@@ -36,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="20dp"
             android:textSize="15dp" />
 
 
