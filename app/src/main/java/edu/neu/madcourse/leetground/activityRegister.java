@@ -84,6 +84,7 @@ public class activityRegister extends AppCompatActivity {
                                 Toast.makeText(activityRegister.this, "Your Leetcode username doesn't exist.", Toast.LENGTH_LONG).show();
                             }else{
                                 finish();
+                                Toast.makeText(activityRegister.this, "Welcome to LeetGround!", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

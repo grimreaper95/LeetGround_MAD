@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,251 +8,312 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:padding="20dp"
-        android:background="#fece2f"
-        android:layout_margin="10dp"
-        >
-        <ImageView
-            android:id="@+id/user_profile_image"
-            android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="120dp"
-            android:src="@drawable/ic_baseline_people_24"
-            android:layout_centerVertical="true"/>
+            android:padding="20dp"
+            android:background="#F8A01A"
+            >
 
-        <ImageView
-            android:id="@+id/edit_profile_pic"
-            android:layout_width="31dp"
-            android:layout_height="34dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="0dp"
-            android:layout_marginBottom="27dp"
-            android:layout_toRightOf="@id/user_profile_image"
-            android:src="@drawable/ic_baseline_add_24" />
+            <ImageView
+                android:id="@+id/user_profile_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_people_24" />
 
-        <TextView
-            android:id="@+id/user_profile_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:layout_toRightOf="@id/user_profile_image"
-            android:fontFamily="sans-serif-condensed"
-            android:text="Ankit Mehta"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/edit_profile_pic"
+                android:layout_width="31dp"
+                android:layout_height="34dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="0dp"
+                android:layout_marginBottom="27dp"
+                android:layout_toRightOf="@id/user_profile_image"
+                android:src="@drawable/ic_baseline_add_24" />
 
-        <TextView
-            android:id="@+id/leetcode_username_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/user_profile_name"
-            android:layout_marginLeft="40dp"
-            android:layout_toRightOf="@id/user_profile_image"
-            android:includeFontPadding="false"
-            android:text="ankit95"
-            android:textSize="20sp" />
-
-    </RelativeLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp">
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="#fece2f"
-            app:cardElevation="10dp"
-            android:layout_margin="10dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_baseline_add_24" />
-
-                <TextView
-                    android:id="@+id/user_points_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:includeFontPadding="false"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/user_leagues"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="My Leagues"
-                    android:textSize="14sp"
-                    android:includeFontPadding="false"
-                    android:layout_below="@id/user_points_value"
-                    android:layout_centerHorizontal="true"/>
-
-
-            </RelativeLayout>
-
-
-
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            app:cardBackgroundColor="#fece2f"
-            app:cardElevation="10dp"
-            android:layout_margin="10dp">
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="10dp"
-                    android:src="@drawable/ic_baseline_add_24" />
-
-                <TextView
-                    android:id="@+id/user_coins_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:includeFontPadding="false"
-                    android:textSize="20sp" />
-
-                <TextView
-                    android:id="@+id/user_coins"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Coins"
-                    android:textSize="14sp"
-                    android:includeFontPadding="false"
-                    android:layout_below="@id/user_coins_value"
-                    android:layout_centerHorizontal="true"/>
-
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
-        android:orientation="vertical">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            app:cardCornerRadius="20dp">
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/user_profile_name"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_add_24"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Email: "
-                    android:textSize="15dp"
-                    android:textColor="@color/black"/>
-                <TextView
-                    android:id="@+id/user_email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
-                    android:textSize="13dp" />
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="70dp"
+                android:layout_toRightOf="@id/user_profile_image"
+                android:fontFamily="sans-serif-condensed"
+                android:text="Ankit Mehta"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/leetcode_username_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/user_profile_name"
+                android:layout_marginLeft="70dp"
+                android:layout_toRightOf="@id/user_profile_image"
+                android:includeFontPadding="false"
+                android:text="ankit95"
+                android:textSize="20sp" />
 
+        </RelativeLayout>
 
-
-
-
-
-        </androidx.cardview.widget.CardView>
-
-
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Billing Address">
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/user_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#fece2f"
+                app:cardElevation="10dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/ic_baseline_add_24" />
+
+                    <TextView
+                        android:id="@+id/user_points_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:includeFontPadding="false"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/user_leagues"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="My Leagues"
+                        android:textSize="14sp"
+                        android:includeFontPadding="false"
+                        android:layout_below="@id/user_points_value"
+                        android:layout_centerHorizontal="true"/>
+
+
+                </RelativeLayout>
+
+
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="#fece2f"
+                app:cardElevation="10dp"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="15dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/coins_image"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_coins_svgrepo_com" />
+
+                    <TextView
+                        android:id="@+id/user_coins_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_below="@+id/coins_image"
+                        android:includeFontPadding="false"
+                        android:textSize="20sp"
+                        android:layout_marginTop="3dp"
+                        />
+
+                    <TextView
+                        android:id="@+id/user_coins"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/user_coins_value"
+                        android:layout_centerHorizontal="true"
+                        android:includeFontPadding="false"
+                        android:text="Coins"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            >
+            android:orientation="vertical"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="15dp">
 
-            <ImageView
-                android:id="@+id/shopping_icon"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:src="@drawable/ic_baseline_add_24" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingRight="15dp"
+                android:layout_gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_email_svgrepo_com_copy"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email:"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/user_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:textSize="18dp"
+                    android:text="android.dev@northeastern.edu"
+                    android:layout_marginLeft="5dp" />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="5dp"/>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingRight="15dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:id="@+id/shopping_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_present_svgrepo_com_copy"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:id="@+id/shop_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/shopping_icon"
+                    android:gravity="center"
+                    android:onClick="goShopping"
+                    android:text="Redeem Coins Here"
+                    android:textColor="@color/black"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Billing Address"
+                android:layout_marginTop="15dp"
+                app:boxBackgroundColor="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/user_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:shadowColor="#F8A01A"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingRight="15dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="15dp">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_bell_svgrepo_com_copy"
+                    android:layout_marginLeft="10dp"/>
+
+                <Switch
+                    android:id="@+id/reminder_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Notification Reminder:  "
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp"
+                    />
+
+
+            </LinearLayout>
+
+
 
             <Button
-                android:id="@+id/shop_text"
-                android:layout_width="wrap_content"
+                android:id="@+id/save_changes"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/shopping_icon"
-                android:gravity="center"
-                android:onClick="goShopping"
-                android:text="Redeem Coins"
-                android:textColor="@color/purple_200" />
+                android:text="save changes"
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"/>
 
-
-            <Switch
-                android:id="@+id/reminder_switch"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/log_out"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:text="Reminder:  "/>
-
-
+                android:text="Log out"
+                android:layout_gravity="center"/>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/save_changes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="save changes"/>
 
-        <Button
-            android:id="@+id/log_out"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Log out"/>
+
     </LinearLayout>
 
 
 
-</LinearLayout>
+</ScrollView>

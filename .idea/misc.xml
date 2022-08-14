@@ -3,7 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.153" />
+        <entry key="app/src/main/res/drawable/ic_baseline_group_add_24.xml" value="0.153" />
+        <entry key="app/src/main/res/drawable/ic_baseline_people_24.xml" value="0.1555" />
+        <entry key="app/src/main/res/drawable/ic_baseline_refresh_24.xml" value="0.1555" />
+        <entry key="app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.1555" />
+        <entry key="app/src/main/res/drawable/ic_bell_svgrepo_com.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_leader_board.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/layout/activity_leagues.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/activity_register.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.2620391845703125" />
+        <entry key="app/src/main/res/layout/create_dialogue.xml" value="0.254981884057971" />
+        <entry key="app/src/main/res/layout/join_dialogue.xml" value="0.254981884057971" />
+        <entry key="app/src/main/res/layout/leaderboard_item_link.xml" value="0.254981884057971" />
+        <entry key="app/src/main/res/layout/league_item.xml" value="0.28125" />
+        <entry key="app/src/main/res/layout/shop_confirm.xml" value="0.13956433637284701" />
+        <entry key="app/src/main/res/layout/store_layout.xml" value="0.13956433637284701" />
       </map>
     </option>
   </component>
