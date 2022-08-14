@@ -36,6 +36,7 @@ public class activityRegister extends AppCompatActivity {
     private AppCompatButton signupbutton;
     private RequestQueue requestQueue;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
