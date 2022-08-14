@@ -10,7 +10,8 @@
         app:cardCornerRadius="8dp"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
         <RelativeLayout
             android:padding="10dp"
             android:layout_width="match_parent"
@@ -21,12 +22,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/floating_registration_name"
                 android:layout_centerHorizontal="true"
-                android:background="@color/black"
+                android:background="@color/white"
+                app:endIconMode="clear_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="10dp">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name"
+                    android:maxLength="20"
+                    android:backgroundTint="@color/white"
                     android:id="@+id/registration_name" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -35,11 +40,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/floating_registration_leetcodename"
                 android:layout_below="@+id/floating_registration_name"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                app:endIconMode="clear_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Leetcode Username"
+                    android:backgroundTint="@color/white"
                     android:id="@+id/registration_leetcodename" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,11 +56,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/floating_email"
                 android:layout_below="@+id/floating_registration_leetcodename"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                app:endIconMode="clear_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
+                    android:backgroundTint="@color/white"
                     android:inputType="textEmailAddress"
                     android:id="@+id/registration_email" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -63,11 +74,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/floating_registration_password"
                 android:layout_below="@+id/floating_email"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                app:endIconMode="password_toggle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Password"
+                    android:backgroundTint="@color/white"
                     android:inputType="textPassword"
                     android:id="@+id/registration_password" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -79,12 +93,15 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/floating_registration_confirm_password"
                 android:layout_below="@+id/floating_registration_password"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                app:endIconMode="password_toggle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Confirm Password"
                     android:inputType="textPassword"
+                    android:backgroundTint="@color/white"
                     android:id="@+id/registration_confirm_password" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +115,8 @@
                 android:layout_marginBottom="10dp"
                 android:elevation="10dp"
                 android:text="SIGN UP"
-                android:textColor="@android:color/white"
+                android:backgroundTint="@color/black"
+                android:textColor="#F8A01A"
                 android:textStyle="bold" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>

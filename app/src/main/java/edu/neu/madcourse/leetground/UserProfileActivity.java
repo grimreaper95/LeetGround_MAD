@@ -98,9 +98,10 @@ public class UserProfileActivity extends AppCompatActivity {
 
         editor = sharedPreferences.edit();
 
-        String encodedProfilePicImgStr= sharedPreferences.getString("profilePicImgByteArrStr", "");
+        String encodedProfilePicImgStr= sharedPreferences.getString("profilePicImgByteArrStr", null);
+        Log.d(TAG, "image is null or not "+encodedProfilePicImgStr);
 
-        if(encodedProfilePicImgStr != null) {
+        if(!encodedProfilePicImgStr.equals("null")) {
             byte[] profilePicImgByteArr = Base64.decode(encodedProfilePicImgStr, Base64.DEFAULT);
             Bitmap profilePicBitmap = BitmapFactory.decodeByteArray(profilePicImgByteArr, 0, profilePicImgByteArr.length);
             profileImage.setImageBitmap(profilePicBitmap);
