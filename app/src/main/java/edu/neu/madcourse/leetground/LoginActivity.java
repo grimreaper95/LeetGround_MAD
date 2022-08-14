@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("MadSharedPref", MODE_PRIVATE);
 
         if (sharedPreferences.getBoolean("loggedIn", false)) {
-            incrementCoins();
+            incrementCoins(false);
             startActivity(new Intent(this, LeaguesActivity.class));
             finish();
         }
@@ -130,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
                                     spEdit.putBoolean("loggedIn", true);
                                     spEdit.putString("profilePicImgByteArrStr",profilePicImgEncoded);
                                     spEdit.apply();
-                                    incrementCoins();
+                                    incrementCoins(true);
 
 //                                     new UserProfile(jwtToken, name, userName, password,
 //                                             email, Boolean.parseBoolean(isReminderOn),
@@ -175,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void incrementCoins() {
+    private void incrementCoins(boolean goToUserProfile) {
             String userId = sharedPreferences.getString("userId", "");
             String url = "https://mad-backend-sprinboot-server.herokuapp.com/user/" + userId + "/increment/1";
             StringRequest stringRequest = new StringRequest(Request.Method.PUT,url,
@@ -183,17 +183,13 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(this, "Congratulations, you earned 1 coin for daily sign in bonus!", Toast.LENGTH_LONG).show();
                 spEdit.putInt("coins", sharedPreferences.getInt("coins", 0) + 1);
                 spEdit.commit();
-                        startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
-                        finish();
+                if(goToUserProfile) {
+                    startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
+                    finish();
+                }
             },error -> {
                 Log.e("shashank","onFailure"+error.toString());
             });
-
-                /*response -> ,
-                        //Toast.makeText(,"Success",Toast.LENGTH_SHORT).show(),
-                error -> );
-
-                 */
             SingletonVolley.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
 
