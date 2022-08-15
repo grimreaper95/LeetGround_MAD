@@ -127,7 +127,7 @@ public class Shop_Confirm_Dialogue extends AppCompatDialogFragment {
         String body = "Thank you for your purchase. Your order for "+mtitle+"is on its way to the address: "+address.getText().toString();
 
         HashMap<String, String> params = new HashMap<String, String>();
-        params.put("senderEmail", email);
+        params.put("reciverEmail", email);
         params.put("subject", subject);
         params.put("body", body);
 
