@@ -62,7 +62,8 @@ public class ChatActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         this.userId = Integer.parseInt(intent.getStringExtra("userId"));
-        this.username = intent.getStringExtra("username");
+        this.username = intent.getStringExtra("userName");
+        Log.d("shashank username", this.username);
         this.leagueId = Integer.parseInt(intent.getStringExtra("leagueId"));
         this.leagueName  = intent.getStringExtra("leagueName");
 
@@ -152,7 +153,7 @@ public class ChatActivity extends AppCompatActivity {
                 }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(ChatActivity.this, "Couldn't notify other league members", Toast.LENGTH_LONG).show();
+//                Toast.makeText(ChatActivity.this, "Couldn't notify other league members", Toast.LENGTH_LONG).show();
 
             }
         });

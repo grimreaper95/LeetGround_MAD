@@ -82,6 +82,8 @@ public class LeaderBoardActivity extends AppCompatActivity{
         //sharedPreferences.getString(, "");
         userId = sharedPreferences.getString("userId", "");
         userName = sharedPreferences.getString("userName", "");
+        Log.d("shashank username", userName);
+        this.leagueName = leagueName;
 //        userScore = sharedPreferences.getString("userScore", "");
 
 
@@ -278,6 +280,7 @@ public class LeaderBoardActivity extends AppCompatActivity{
 
 
     private void startLeagueChat() {
+        Log.d("shashank username", userName);
         startActivity(new Intent(this, ChatActivity.class)
                 .putExtra("userId", userId)
                 .putExtra("userName", userName)

@@ -54,6 +54,7 @@ public class CustomAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             MessageModel messageModel = list.get(position);
             messageTV.setText(messageModel.message);
             dateTV.setText(messageModel.messageTime);
+            usernameTV.setText(messageModel.username);
         }
     }
 

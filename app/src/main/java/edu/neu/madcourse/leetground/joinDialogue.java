@@ -194,7 +194,7 @@ public class joinDialogue extends AppCompatDialogFragment {
 
 
     public interface DialogueListener{
-        void notify(String leagueName, int leagueId, int userId);
+        void notify(String leagueName, int leagueId, int usersInLeague);
     }
 
     @Override
