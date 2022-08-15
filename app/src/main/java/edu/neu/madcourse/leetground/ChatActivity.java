@@ -149,7 +149,7 @@ public class ChatActivity extends AppCompatActivity {
         params.put("body", "New text from league: "+leagueName);
         params.put("title","New message!!");
 
-        JsonObjectRequest request_json = new JsonObjectRequest( "https://mad-backend-sprinboot-server.herokuapp.com/user/"+userId+"/league/"+leagueId, new JSONObject(params),
+        JsonObjectRequest request_json = new JsonObjectRequest( "https://mad-backend-sprinboot-server.herokuapp.com/notification/user/"+userId+"/league/"+leagueId, new JSONObject(params),
                 new com.android.volley.Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response) {
