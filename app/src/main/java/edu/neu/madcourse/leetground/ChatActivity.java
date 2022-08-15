@@ -1,6 +1,7 @@
 package edu.neu.madcourse.leetground;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -50,6 +51,7 @@ public class ChatActivity extends AppCompatActivity {
     List<MessageModel> chatMessages=new ArrayList<MessageModel>();
     Set<String> visitedMsg=new HashSet<String>();
     RequestQueue requestQueue;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +104,9 @@ public class ChatActivity extends AppCompatActivity {
                     visitedMsg.add(ds.getKey());
                     MessageModel value=ds.getValue(MessageModel.class);
                     System.out.println(" new chat message: "+value);
+                    if(value.username.equals(username)){
+                        value.messageType=CustomAdapter.MESSAGE_TYPE_OUT;
+                    }
                     chatMessages.add(value);
                 }
 
@@ -132,7 +137,7 @@ public class ChatActivity extends AppCompatActivity {
             return;
         }
         System.out.println("message to be sent: "+messageToBeSent.getText().toString());
-        MessageModel chatMessage=new MessageModel(messageToBeSent.getText().toString(),CustomAdapter.MESSAGE_TYPE_OUT, this.username);
+        MessageModel chatMessage=new MessageModel(messageToBeSent.getText().toString(),CustomAdapter.MESSAGE_TYPE_IN, this.username);
         usersRef.push().setValue(chatMessage);
         messageToBeSent.setText("");
         sendNotification(leagueId);
